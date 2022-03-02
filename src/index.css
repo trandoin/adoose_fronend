@@ -1,0 +1,324 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.GoogleLoginbutton{
+  border-radius: 3px !important;
+  box-shadow: none !important;
+  border:1px solid #ccc !important;
+  font-size: inherit !important;
+  width: 100%;
+}
+
+
+.kep-login-facebook{
+  border-radius : 3px !important;
+  font-size: inherit !important;
+  font-weight: 500 !important;
+  text-transform: none !important;
+  border-radius: 3px !important;
+}
+.kep-login-facebook.small{
+  padding: 10px !important;
+  display:flex;
+}
+
+.kep-login-facebook svg{
+  margin-right: 1rem;
+}
+.kep-login-facebook button{
+  width: 100%;
+}
+
+.MuiOutlinedInput-input {
+  padding: 13.5px 14px !important;
+}
+.MuiOutlinedInput-inputMarginDense {
+  padding-top: 5.5px !important;
+}
+
+.MuiInputAdornment-positionStart {
+  margin: 0 0 6px 0  !important;
+}
+
+.ant-btn{
+  height: auto !important;
+}
+
+*{
+  user-select: none !important;
+}
+
+.GreenOfSnackbar div{
+  background : #4CAF50 !important;
+}
+
+
+/* // feed  =>> */
+.feedItemHere .ui.secondary.menu{
+  width: 100% !important;
+}
+
+
+.feedItemHere .ui.secondary.menu{
+  margin: 0 !important;
+}
+
+.feedItemHere .ui.secondary.menu .item{
+  width:100%;
+  box-sizing: content-box !important;
+  padding: 0.5rem 0 !important;
+  margin: 0 0 !important;
+}
+
+.feedItemHere .ui.secondary.menu .item{
+  padding: 0.5rem;
+  margin-bottom: 0.5rem !important;
+  border-top-left-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
+}
+
+.feedItemHere .ui.segment{
+  padding: 0 !important;
+  background-color: transparent;
+  border:none !important;
+  box-shadow: none !important;
+}
+.feedItemHere .ui.active.segment.tab{
+  background-color: transparent;
+  border:none !important;
+  box-shadow: none !important;
+}
+
+.postCardsData{
+  font-family: 'Baloo Bhai 2', cursive;
+  background: white !important;
+  box-shadow:0 1px 2px 0 rgb(34 36 38 / 15%);
+  border-radius: .28571429rem;
+  border: 1px solid rgba(34,36,38,.15);
+}
+
+.ProfilePageMaster{
+  font-family: 'Baloo Bhai 2', cursive;
+}
+
+@media screen and (max-width:1000px) {
+  
+  .feedItemHere .ui.menu .item{
+    padding: 0.5rem;
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+  }
+  .feedItemHere .ui[class*="bottom fixed"].menu {
+    background-color: transparent;
+  }
+  
+  .feedItemHere .ui[class*="bottom fixed"].menu .item{
+    padding-right: 2rem !important;
+    width: 20%;
+    background-color: white;
+    box-sizing: border-box;
+  }
+
+  
+
+  .feedItemHere .ui[class*="bottom fixed"].menu .item.active{
+    background-color: palevioletred;
+  }
+}
+
+.feedItemHere .ui.secondary.menu .active.item{
+  background-color: #923bb275 !important;
+  border-top-left-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
+  color:rgb(238, 238, 238);
+}
+
+.feedItemHere  .ui.grid>[class*="four wide"].column{
+  width: 20% !important;
+  position:fixed !important;
+}
+
+.feedItemHere .ui.grid>[class*="twelve wide"].column{
+  width: 75%;
+  margin-left: auto;
+}
+
+
+
+/* .feedItemHere{
+  background-color: transparent !important;
+} */
+
+/* 
+.feedItemHere .ui.pointing.menu{
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background-color: transparent !important;
+}
+
+.feedItemHere .ui.pointing.menu .item.active{
+  background-color: white !important;
+} */
+
+.SearchbarNavbar .ui.input{
+  width: 100%;
+}
+
+
+.ArrayInPostCreation .ui.input>input{
+  border:0 !important;
+  background: transparent !important;
+  flex-grow: 1;
+}
+
+.ArrayInPostCreation:focus, .ArrayInPostCreation:active{
+  border:1px solid blue !important;
+}
+
+.searchbarForChat .ui.icon.input{
+  width: 100%;
+}
+
+.searchbarForChat .ui.grid{
+  
+  margin: 0 auto !important;
+}
+
+
+.sideLeftChatOnHover:hover{
+  background-color: #bbb;
+  cursor: pointer;
+}
+
+.NotificationDropdown .menu{
+  height:50vh;
+}
+
+.NotificationDropdown.ui.dropdown .menu.transition .item{
+  padding:1rem 0.5rem !important;
+  width: 30rem !important;
+}
+
+.NotificationDropdown .bell.icon{
+  margin:0;
+  padding:0;
+}
+.NotificationDropdown.DropdownButtonMain:hover{
+  background-color: #e5e5e5;
+}
+
+.chatDropdown.ChatButtonMain:hover{
+  background-color: #e5e5e5 !important;
+}
+.chatDropdown.ChatButtonMain{
+  background-color: #fff !important;
+}
+.chatDropdown.ChatButtonMain.ui.button.icon{
+  padding: 0.55rem !important;
+}
+
+.NotifyIconNumber .ui.floating.label {
+  margin: 2px 0 0 -1.7em!important;
+}
+
+.NavbarUnlocked{
+  position: fixed !important;
+  top: 0px !important;
+  width: 100% !important;
+  z-index: 1 !important;
+  box-shadow: 0 0 4px #555 !important;
+}
+
+.half-circle {
+  width: 100px !important;
+  height: 200px !important;
+  background-color: tranparent !important;
+  border-bottom-right-radius: 10px !important;
+  border-top-right-radius: 100px !important;
+  border: 2px solid gray !important;
+  border-left: 0 !important;
+  
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.ProfileSlave .ui.secondary .active.item{
+  background-color: #983098bf !important;
+  color: white !important;
+}
+.ProfileSlave{
+  width:82.5%;
+}
+@media screen and (max-width : 1000px) {
+  .ProfileSlave {
+    width:95%;
+  }
+}
+
+.ProfileSlave .ui.secondary.menu .item {
+  padding: 1rem 0;
+  margin: 0;
+  width: 20%;
+  text-align: center;
+  border: 0;
+  display: flex;
+  justify-content: center;
+}
+.ProfileSlave .ui.secondary.menu{
+  width: 100%;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ABCDEFGH{
+  margin:2rem;
+}
+.Kudimenuhendi{
+  width: 50%;
+}
+.menunachando{
+  width:82.5% !important; 
+  padding: 0 2rem;
+}
+@media screen and (max-width:800px) {
+  .ABCDEFGH{
+    margin:0;
+  }
+  .Kudimenuhendi{
+    width: 75% !important;
+  }
+
+}
+
+@media screen and (max-width:450px) {
+  .ABCDEFGH{
+    margin:0;
+  }
+  .Kudimenuhendi{
+    width: 100% !important;
+  }
+  .menunachando{
+    width:100% !important; 
+    padding: 1rem;
+  }
+}
+
+.onHoverGrey:hover{
+  background-color: #ddd;
+  border-radius: 50%;
+}

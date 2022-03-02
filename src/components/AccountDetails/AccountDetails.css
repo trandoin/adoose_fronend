@@ -1,0 +1,7 @@
+.modal-input-box {
+    background: lightblue;
+    border-radius: 6px;
+    border: none;
+    color: var(--btn-text-color-primary);
+    width: 100%;
+  }

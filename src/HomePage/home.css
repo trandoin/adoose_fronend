@@ -1,0 +1,34 @@
+*{
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+.brand-name{
+    font-size: 3.7rem;
+}
+
+.hei{
+    height: 100vh;
+}
+
+.hei1{
+    font-size: 2.5rem;
+}
+.hei2{
+    font-size: 1.7rem;
+}
+
+.header-img{
+    animation: movement-up 3s linear infinite;
+}
+
+.color1{
+    background: linear-gradient(65deg,#72c9e4 48%,white 48% 52% );
+}
+
+@keyframes movement-up {
+    0%   {transform: translateY(0px);}
+    /* 25%  {background-color: yellow;} */
+    50%  {transform: translateY(13px);}
+    100% {transform: translateY(0px);}
+  }
