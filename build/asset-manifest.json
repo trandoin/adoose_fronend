@@ -1,31 +1,22 @@
 {
   "files": {
-    "main.css": "/argon-dashboard-react/static/css/main.ba88dd50.chunk.css",
-    "main.js": "/argon-dashboard-react/static/js/main.c4620904.chunk.js",
-    "main.js.map": "/argon-dashboard-react/static/js/main.c4620904.chunk.js.map",
-    "runtime-main.js": "/argon-dashboard-react/static/js/runtime-main.00d87b83.js",
-    "runtime-main.js.map": "/argon-dashboard-react/static/js/runtime-main.00d87b83.js.map",
-    "static/css/2.b69504de.chunk.css": "/argon-dashboard-react/static/css/2.b69504de.chunk.css",
-    "static/js/2.988a3d29.chunk.js": "/argon-dashboard-react/static/js/2.988a3d29.chunk.js",
-    "static/js/2.988a3d29.chunk.js.map": "/argon-dashboard-react/static/js/2.988a3d29.chunk.js.map",
-    "index.html": "/argon-dashboard-react/index.html",
-    "static/css/2.b69504de.chunk.css.map": "/argon-dashboard-react/static/css/2.b69504de.chunk.css.map",
-    "static/css/main.ba88dd50.chunk.css.map": "/argon-dashboard-react/static/css/main.ba88dd50.chunk.css.map",
-    "static/js/2.988a3d29.chunk.js.LICENSE.txt": "/argon-dashboard-react/static/js/2.988a3d29.chunk.js.LICENSE.txt",
-    "static/js/main.c4620904.chunk.js.LICENSE.txt": "/argon-dashboard-react/static/js/main.c4620904.chunk.js.LICENSE.txt",
-    "static/media/argon-react-white.png": "/argon-dashboard-react/static/media/argon-react-white.e4dd3b41.png",
-    "static/media/argon-react.png": "/argon-dashboard-react/static/media/argon-react.128d71d3.png",
-    "static/media/all.min.css": "/argon-dashboard-react/static/media/fa-solid-900.efbd5d20.eot",
-    "static/media/nucleo.css": "/argon-dashboard-react/static/media/nucleo-icons.d6a66724.ttf",
-    "static/media/profile-cover.jpg": "/argon-dashboard-react/static/media/profile-cover.97899245.jpg",
-    "static/media/team-1-800x800.jpg": "/argon-dashboard-react/static/media/team-1-800x800.fa5a7ac2.jpg",
-    "static/media/team-4-800x800.jpg": "/argon-dashboard-react/static/media/team-4-800x800.99c612eb.jpg"
+    "main.css": "/static/css/main.66c077bc.chunk.css",
+    "main.js": "/static/js/main.ef8c7755.chunk.js",
+    "runtime-main.js": "/static/js/runtime-main.71c5bbf3.js",
+    "static/css/2.1e3d13ce.chunk.css": "/static/css/2.1e3d13ce.chunk.css",
+    "static/js/2.22c21695.chunk.js": "/static/js/2.22c21695.chunk.js",
+    "index.html": "/index.html",
+    "static/js/2.22c21695.chunk.js.LICENSE.txt": "/static/js/2.22c21695.chunk.js.LICENSE.txt",
+    "static/media/VecotrImage3.04709daa.png": "/static/media/VecotrImage3.04709daa.png",
+    "static/media/adoose.819eeb12.png": "/static/media/adoose.819eeb12.png",
+    "static/media/semantic.min.css": "/static/media/outline-icons.ddae9b1b.woff",
+    "static/media/logo.6ce24c58.svg": "/static/media/logo.6ce24c58.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.00d87b83.js",
-    "static/css/2.b69504de.chunk.css",
-    "static/js/2.988a3d29.chunk.js",
-    "static/css/main.ba88dd50.chunk.css",
-    "static/js/main.c4620904.chunk.js"
+    "static/js/runtime-main.71c5bbf3.js",
+    "static/css/2.1e3d13ce.chunk.css",
+    "static/js/2.22c21695.chunk.js",
+    "static/css/main.66c077bc.chunk.css",
+    "static/js/main.ef8c7755.chunk.js"
   ]
 }
