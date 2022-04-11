@@ -64,7 +64,7 @@ export default function Card(props){
     if(!props.data)     return <div></div>;
     const zx = props.data.map((item,index)=>{
 
-        console.log(item)
+   
         if(item && (props.search_location =='' || props.search_location == item.Location[0]))
         {
             return <SingleCard AccountType={props.group} data={item} key={index} />;
@@ -77,12 +77,13 @@ export default function Card(props){
 function SingleCard(props) {
 
     const [fullView, changeFullView] = React.useState(false);
+    console.log("this is new one ",props);
     
     if(props.data.Type==="Collaboration")
     {
-
-    return (
-        <div style={{fontSize:'1.2rem',margin:'0.5rem',marginTop:'0',zIndex:'-1','position': 'absolute'}} className="mr-1 p-1 postCardsData">
+        
+    return (<>
+        <div style={{fontSize:'1.2rem',margin:'0.5rem',marginTop:'0',zIndex:'-1','position': 'relative'}} className="mr-1 p-1 postCardsData">
             <div className="d-flex p-2">
                 <div style={window.innerWidth>700?{width:'13%'}:{width:'25%'}}  className="d-flex">
                     <div className="d-flex flex-column align-items-center">
@@ -175,7 +176,7 @@ function SingleCard(props) {
                 null
             }
             </div>
-        </div>
+        </div></>
     )
 
         }
@@ -285,6 +286,7 @@ function SingleCard(props) {
             )
         }
         else{
+            if(new Date(props.data.ValidUpto) > new Date() ){
             return (
                 <div style={{fontSize:'1.2rem',margin:'0.5rem',marginTop:'0',zIndex:'-1'}} className="mr-1 p-1 postCardsData">
             <div className="d-flex p-2">
@@ -383,5 +385,8 @@ function SingleCard(props) {
             </div>
         </div>
             )
+        }else{
+            return (<></>) ;
         }
+    }
 }

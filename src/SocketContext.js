@@ -13,7 +13,11 @@ import * as api from "./api/Profile";
 
 const SocketContext = createContext();
 
-const socket = io('http://localhost:5000');
+const socket = io("https://adoose-backend.herokuapp.com");
+
+socket.on("connect_error", (err) => {
+  console.log(`connect_error due to ${err.message}`);
+});
 
 const ContextProvider = ({ children }) => {
 

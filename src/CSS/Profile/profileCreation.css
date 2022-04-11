@@ -108,6 +108,9 @@ body{
       .ant-tabs > .ant-tabs-nav{
           width: 100% !important;
       }
+      .edit_profile_form{
+          width:90% !important;
+      }
   }
 
 

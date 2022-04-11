@@ -26,6 +26,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import axios from "axios";
+import {Link} from 'react-router-dom';
 
 var startComments = 0;
 var CommentFetcher = null;
@@ -306,32 +307,32 @@ export default class OtherProfile extends Component {
       alert("Razorpay SDK failed to load. Are you online?");
       return;
     }
-    // const profileData = await api.getProfileData({
-    //   Email: localStorage.getItem("Email"),
-    //   Mobile: localStorage.getItem("Mobile"),
-    // });
+  
     const fee = this.state.Fee;
-    console.log(fee) 
+   
     const req = {
       'Fee':fee
     }
-    var data = await axios.post("http://localhost:5000/razorpay",req);
+    var data = await axios.post(`https://adoose-backend.herokuapp.com/razorpay`,req);
 
-     console.log(data.data)
+
      data = data.data
-     console.log(data.amount.toString())
+     
      const NetAmount = 0.9 * this.state.Fee;
-     console.log(NetAmount)
+   
     const options = {
-      key: "rzp_test_ejKxxUmceahR6k",
+      // key: "rzp_test_ejKxxUmceahR6k",
+      "key": "rzp_live_kgU0v3G5FqCKyR",   
+      "key_id": "rzp_live_kgU0v3G5FqCKyR", 
+      "key_secret":"MlKsvr1tCHAuXnRPfcT9YTzU", 
       currency: data.currency,
       amount: data.amount,
-      order_id: data.id,
+      // order_id: data.id,
       name: "Service Fee",
       description: "Thank you choosing Razorpay",
       handler: async function (response) {
         const res = await axios.post(
-          "http://localhost:5000/payment/verify",
+          `https://adoose-backend.herokuapp.com/payment/verify`,
           response
         );
         if (res.signatureIsValid == "false") {
@@ -343,7 +344,7 @@ export default class OtherProfile extends Component {
              Username2: localStorage.getItem("Username"),
              NetAmount: NetAmount
            }
-           axios.post("http://localhost:5000/orders/add",req)
+           axios.post(`https://adoose-backend.herokuapp.com/orders/add`,req)
           window.location.href = '/videocall'
         }
       },
@@ -600,7 +601,7 @@ export default class OtherProfile extends Component {
                     {window.innerWidth < 600 ? (
                       <span></span>
                     ) : (
-                      <span>Messages</span>
+                      <span><Link to="/chat">Messages</Link></span>
                     )}
                   </Button>
                   {/* <Button className=" my-1 mx-1" color='teal' onClick={this.clicked}><HiCurrencyDollar style={{marginRight:'0.6rem',fontWeight:'600'}}  size="1.3em" />

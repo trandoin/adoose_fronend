@@ -1,29 +1,26 @@
 import React, { Component } from 'react'
 import Navbar from '../Navbar/Navbar';
-import { Icon, Tab,Menu,Button,Dimmer,Loader} from 'semantic-ui-react';
-import {AiFillCarryOut} from 'react-icons/ai';
-import { AiOutlinePlus } from "react-icons/ai";
+import { Icon, Tab,Menu,Button} from 'semantic-ui-react';
 import * as api from '../../api/feed';
 import * as NotificationApi from '../../api/NotificationApi';
 import * as FollowApi from '../../api/Profile';
-// import {MdPersonSearch} from 'react-icons/md'
-// import {SiGithubsponsors} from 'react-icons/si';
 import {MdTimeline} from 'react-icons/md';
 import {FaWpexplorer} from 'react-icons/fa';
 import {FiUserPlus} from 'react-icons/fi';
-import {MdLocalOffer,MdOutlinePersonAddAlt} from 'react-icons/md';
 import {AiOutlineUsergroupAdd} from 'react-icons/ai';
 import {GoTag} from 'react-icons/go';
-// import {}
 
 import Card from '../Card/Card';
 import {Link} from 'react-router-dom';
 
+import TabTopDesign from '../TabTopDesign';
+import { configConsumerProps } from 'antd/lib/config-provider';
+import './feed.css';
+
 var fetchTimelineTimeout = null;
 var fetchExploreTimeout = null;
 
-export default class feed extends Component {
-
+class Feed extends Component {
     constructor(props){
         super(props);
         this.state = {
@@ -44,37 +41,116 @@ export default class feed extends Component {
             search_location: '',
             panes : [
                 {
-                    menuItem: <Menu.Item key='Timeline'><this.TabTopDesign value="Timeline" /></Menu.Item>,
-                    render: () => <Tab.Pane attached={false}>
-                        <Card data={this.state.TimeLineTab} group={this.state.AccountType} search_location={this.state.search_location} />    
+                    menuItem: <Menu.Item key='Timeline'><TabTopDesign value="Timeline" /></Menu.Item>,
+                    render: () => <Tab.Pane attached={false} >
+                           <div style={{'marginBottom': '10px'}}>
+    <form action="/" method="get"  onSubmit={this.formOnSubmit}>
+      <label htmlFor="header-search">
+          <span className="visually-hidden">Search Location</span>
+      </label>
+      <input
+          type="text"
+          id="header-search"
+          placeholder="Filter Location"
+          name="s" 
+          style={{width:"300px"}}
+      />
+      <button type="submit">Search</button>
+
+  </form></div>
+  <div className='card_offer'> <Card data={this.state.TimeLineTab} group={this.state.AccountType} search_location={this.state.search_location} /> </div>
+                          
+                       
 
                     </Tab.Pane>,
                 },
                 {
-                    menuItem: <Menu.Item key='Explore'><this.TabTopDesign value="Explore" /></Menu.Item>,
+                    menuItem: <Menu.Item key='Explore'><TabTopDesign value="Explore" /></Menu.Item>,
                     render: () => <Tab.Pane attached={false}>
+                       <div style={{'marginBottom': '10px'}}>
+    <form action="/" method="get"  onSubmit={this.formOnSubmit}>
+      <label htmlFor="header-search">
+          <span className="visually-hidden">Search Location</span>
+      </label>
+      <input
+          type="text"
+          id="header-search"
+          placeholder="Filter Location"
+          name="s" 
+          style={{width:"300px"}}
+      />
+      <button type="submit">Search</button>
+
+  </form></div>
+  <div className='card_offer'>
                         <Card data={this.state.ExploreTab} group={this.state.AccountType} search_location={this.state.search_location}/>
-                        
+                        </div>
                     </Tab.Pane>,
                 },
                 {
-                    menuItem: <Menu.Item key='Collab'><this.TabTopDesign value="Collab" /></Menu.Item>,
+                    menuItem: <Menu.Item key='Collab'><TabTopDesign value="Collab" /></Menu.Item>,
                     render: () => <Tab.Pane attached={false}>
+                        <div style={{'marginBottom': '10px'}}>
+    <form action="/" method="get"  onSubmit={this.formOnSubmit}>
+      <label htmlFor="header-search">
+          <span className="visually-hidden">Search Location</span>
+      </label>
+      <input
+          type="text"
+          id="header-search"
+          placeholder="Filter Location"
+          name="s" 
+          style={{width:"300px"}}
+      />
+      <button type="submit">Search</button>
+
+  </form></div> <div className='card_offer'>
                         <Card data={this.state.CollabTab} group={this.state.AccountType} search_location={this.state.search_location}/> 
-
+</div>
                     </Tab.Pane>,
                 },
                 {
-                    menuItem: <Menu.Item key='Requirement'><this.TabTopDesign value="Requirement" /></Menu.Item>,
+                    menuItem: <Menu.Item key='Requirement'><TabTopDesign value="Requirement" /></Menu.Item>,
                     render: () => <Tab.Pane attached={false}>
+                        <div style={{'marginBottom': '10px'}}>
+    <form action="/" method="get"  onSubmit={this.formOnSubmit}>
+      <label htmlFor="header-search">
+          <span className="visually-hidden">Search Location</span>
+      </label>
+      <input
+          type="text"
+          id="header-search"
+          placeholder="Filter Location"
+          name="s" 
+          style={{width:"300px"}}
+      />
+      <button type="submit">Search</button>
+
+  </form></div> <div className='card_offer'>
                         <Card data={this.state.RequirementTab} group={this.state.AccountType} search_location={this.state.search_location} />
-
+</div>
                     </Tab.Pane>,
                 },
                 {
-                    menuItem: <Menu.Item key='Offer'><this.TabTopDesign value="Offer" /></Menu.Item>,
+                    menuItem: <Menu.Item key='Offer'><TabTopDesign value="Offer" /></Menu.Item>,
                     render: () => <Tab.Pane attached={false}>
+                        <div style={{'marginBottom': '10px'}}>
+    <form action="/" method="get"  onSubmit={this.formOnSubmit}>
+      <label htmlFor="header-search">
+          <span className="visually-hidden">Search Location</span>
+      </label>
+      <input
+          type="text"
+          id="header-search"
+          placeholder="Filter Location"
+          name="s" 
+          style={{width:"300px"}}
+      />
+      <button type="submit">Search</button>
+
+  </form></div> <div className='card_offer'>
                         <Card data={this.state.OfferTab} group={this.state.AccountType} search_location={this.state.search_location} /> 
+                        </div>
                     </Tab.Pane>,
                 },
                 {
@@ -87,8 +163,11 @@ export default class feed extends Component {
                 }
             ]
         }
+
     }
     
+
+   
 
     changePanes = () =>{
         const panes = this.state.panes;
@@ -110,37 +189,48 @@ export default class feed extends Component {
         console.log(Notifications)
         console.log(localStorage)
         console.log(localStorage.getItem("Username"))
-      //  console.log(localStorage.getItem("UserName"))
+     
         if(Notifications.data.Notifications) {
             this.setState({Notifications : Notifications.data.Notifications.data, UnreadNotifications : Notifications.data.Notifications.Unread});}
         }
        this.setState({loading:false});
         const feedData = await api.getPosts({Username:localStorage.getItem('Username'), number:this.state.skip});
+        console.log("feedData",feedData);
         var fullDuniyaData = await api.getDuniyaPosts({skip : this.state.DuniyaSkip});
+
+    
         this.setState({skip : 1, DuniyaSkip : 1});
-        console.log(fullDuniyaData.data)
+        console.log("fiss ",fullDuniyaData.data)
         const ActualDuniyaData ={
             data:[]
         };
         for(let i=0;i<fullDuniyaData.data.length;i++)
         {
             const Other_user = fullDuniyaData.data[i]["Username"];
+            console.log("users",Other_user);
             const FollowerData = await FollowApi.getFollowData({Username: Other_user})
-            console.log(FollowerData)
-           const blocked_users = FollowerData.data.data.Block
-            if(!blocked_users.includes(localStorage.getItem("Username"))) {    // if not blocked
+            console.log(FollowerData.data.data)
+            const blocked_users = FollowerData.data.data?.Block;
+            console.log("bloack_user",blocked_users);
+            if(blocked_users && !blocked_users.includes(localStorage.getItem("Username"))) {    // if not blocked
+
                 ActualDuniyaData.data.push(fullDuniyaData.data[i]) 
             }
         }
-         fullDuniyaData = ActualDuniyaData
-         console.log(fullDuniyaData)
-        this.setState({TimeLineTab : feedData.data.Posts});
-        this.setState({ExploreTab : fullDuniyaData.data});
+      
+        //------------------------------------------ start code comment by suraj and this code added in this file only in line no 170-------------------------------------------------------------------------------------------------------------------///
+        // fullDuniyaData = ActualDuniyaData;
+        // this.setState({TimeLineTab : feedData.data.Posts});
+        // this.setState({ExploreTab : fullDuniyaData.data});
+
+          
+        //------------------------------------------ end code comment by suraj  an-------------------------------------------------------------------------------------------------------------------///
 
         // const CollabTab = fullDuniyaData.data.filter((item)=>item["Type"]==="Collaboration");
         const CollabTab = []
         const RequirementTab= []
         const OfferTab = []
+     
         for(let i = 0;i<fullDuniyaData.data.length;i++)
         {
             if(fullDuniyaData.data[i]["Type"]==="Collaboration")
@@ -153,14 +243,17 @@ export default class feed extends Component {
         // const OfferTab = fullDuniyaData.data.filter((item)=>item['Type']==="Offer");
 
         console.log(CollabTab.length, RequirementTab.length, OfferTab.length);
-        console.log(CollabTab);
+        console.log("yes",CollabTab);
         console.log(RequirementTab);
         console.log(OfferTab);
+        fullDuniyaData = ActualDuniyaData;
+        this.setState({TimeLineTab : feedData.data.Posts});
+        this.setState({ExploreTab : fullDuniyaData.data});
         this.setState({CollabTab : CollabTab});
         this.setState({RequirementTab : RequirementTab});
         this.setState({OfferTab : OfferTab});
 
-        console.log(this.state);
+        console.log("state value",this.state);
 
         fetchTimelineTimeout = await setInterval(async() => {
             let data = await api.getPosts({Username : localStorage.getItem("Username"), number: this.state.skip});
@@ -199,7 +292,13 @@ export default class feed extends Component {
             await this.setState({ExploreTab : tt, DuniyaSkip : this.state.DuniyaSkip+1,OfferTab:Offer12,CollabTab:Collab12,RequirementTab:Requirement12});
             await this.changePanes();
 
+
+           
+
         }, 6000 );
+
+
+    
 
     }
 
@@ -213,31 +312,33 @@ export default class feed extends Component {
         setTimeout(() => {window.location.href = '/'}, 1000);
     }
 
-    TabTopDesign = props =>{
-        return (<div className={`w-100 d-flex align-items-center ${window.innerWidth<700?'flex-column':''}`} >
-            {props.value==="Timeline"?<MdTimeline size='1.75em'  style={{paddingLeft:'1rem',boxSizing:'content-box'}} />:null}
-            {props.value==="Explore"?<FaWpexplorer size='1.75em'  style={{paddingLeft:'1rem',boxSizing:'content-box'}} />:null}
-            {props.value==="Collab"?<AiOutlineUsergroupAdd size='1.75em'  style={{paddingLeft:'1rem',boxSizing:'content-box'}} />:null}
-            {props.value==="Requirement"?<FiUserPlus size='1.75em'  style={{paddingLeft:'1rem',boxSizing:'content-box'}} />:null}
-            {props.value==="Offer"?<GoTag size='1.75em'  style={{paddingLeft:'1rem',boxSizing:'content-box'}} />:null}
-            {
-                window.innerWidth>500?
-                <span style={{marginLeft:'1rem',fontWeight:'600', textOverflow:'elipsis', whiteSpace:'nowrap', overflow:'hidden'}} className={`${window.innerWidth<700?'mt-1':''}`}>{props.value}</span>
-                :
-                null
-            }
-        </div>);
-    }
+    // TabTopDesign = props => {
+    //     return (<div className={`w-100 d-flex align-items-center ${window.innerWidth<700?'flex-column':''}`} >
+    //         {props.value==="Timeline"?<MdTimeline size='1.75em'  style={{paddingLeft:'1rem',boxSizing:'content-box'}} />:null}
+    //         {props.value==="Explore"?<FaWpexplorer size='1.75em'  style={{paddingLeft:'1rem',boxSizing:'content-box'}} />:null}
+    //         {props.value==="Collab"?<AiOutlineUsergroupAdd size='1.75em'  style={{paddingLeft:'1rem',boxSizing:'content-box'}} />:null}
+    //         {props.value==="Requirement"?<FiUserPlus size='1.75em'  style={{paddingLeft:'1rem',boxSizing:'content-box'}} />:null}
+    //         {props.value==="Offer"?<GoTag size='1.75em'  style={{paddingLeft:'1rem',boxSizing:'content-box'}} />:null}
+    //         {
+    //             window.innerWidth>500?
+    //             <span style={{marginLeft:'1rem',fontWeight:'600', textOverflow:'elipsis', whiteSpace:'nowrap', overflow:'hidden'}} className={`${window.innerWidth<700?'mt-1':''}`}>{props.value}</span>
+    //             :
+    //             null
+    //         }
+    //     </div>);
+    // }
 
     formOnSubmit = (e) => {
         e.preventDefault();
         this.setState({search_location: e.target.s.value})
     }
 
+
     render() {
+      
         return (
             <div>
-            <div style={{'float':'right','left':'80vw','marginBottom': '10vh'}}>
+            {/* <div style={{'float':'right','left':'80vw','marginBottom': '10vh'}}>
           <form action="/" method="get"  onSubmit={this.formOnSubmit}>
             <label htmlFor="header-search">
                 <span className="visually-hidden">Search Location</span>
@@ -250,7 +351,7 @@ export default class feed extends Component {
             />
             <button type="submit">Search</button>
 
-        </form></div>
+        </form></div> */}
                 {this.state.loading?<></>
                 :
                 <div style={{marginTop:'4rem'}}>
@@ -260,13 +361,14 @@ export default class feed extends Component {
                         {
                             window.innerWidth>1000
                             ?
-                            <Tab className='w-100' menu={{secondary: true,vertical:true}} panes={this.state.panes} />
+                            <Tab className='w-100' menu={{secondary: true,vertical:true}} panes={this.state.panes}  />
                             :
-                            <Tab className='w-100 m-auto' menu={{fixed:'bottom', secondary: false}} panes={this.state.panes} />
+                            <Tab className='w-100 m-auto' menu={{fixed:'bottom', secondary: false}} panes={this.state.panes}  />
                         }
                         
                     </div>
                     <div>
+
                         {
                             window.innerWidth<=1000?
                             <Button color='blue' style={{position:'fixed', zIndex:'2', bottom:'4rem',padding:'1rem', right:'2rem', borderRadius:'50%', border:'1px solid #aaa', boxShadow:'0 0 4px #666'}}>
@@ -279,11 +381,10 @@ export default class feed extends Component {
                         }
                     </div>
                 </div>
-
-                        
-
                 }
             </div>
-        )
+        );
     }
 }
+
+export default Feed;

@@ -164,6 +164,7 @@ export default class CreatePost extends Component {
 
   // Data Change Methods
   handleChangeType = (e, { value }) => {
+    console.log("value",value)
     this.resetDataValues();
     this.setState({ Type: value });
   };
@@ -379,7 +380,8 @@ export default class CreatePost extends Component {
               <span style={{ marginRight: "1rem", minWidth: "22%" }}>
                 Location
               </span>
-              <this.LocationShowAsList value={this.state.LocationForPost} />
+              {this.LocationShowAsList({value:this.state.LocationForPost})}
+              {/* <this.LocationShowAsList value={this.state.LocationForPost} /> */}
             </div>
 
             <div
@@ -513,7 +515,8 @@ export default class CreatePost extends Component {
               <span style={{ marginRight: "1rem", minWidth: "22%" }}>
                 Location
               </span>
-              <this.LocationShowAsList value={this.state.LocationForPost} />
+              {this.LocationShowAsList({value:this.state.LocationForPost})}
+              {/* <this.LocationShowAsList value={this.state.LocationForPost} /> */}
             </div>
 
             <div
@@ -526,7 +529,8 @@ export default class CreatePost extends Component {
               <span style={{ marginRight: "1rem", minWidth: "22%" }}>
                 Language
               </span>
-              <this.LanguageShowAsList value={this.state.LanguageForPost} />
+              {this.LanguageShowAsList({value:this.state.LanguageForPost})}
+              {/* <this.LanguageShowAsList value={this.state.LanguageForPost} /> */}
             </div>
 
             <div

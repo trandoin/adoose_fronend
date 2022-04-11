@@ -101,9 +101,9 @@ export default class ProfilePage extends Component {
   componentDidMount = async () => {
     const profileData = await api.getProfileData({
       Email: localStorage.getItem("Email"),
-      Mobile: localStorage.getItem("Mobile"),
+      Mobile: localStorage.getItem("Mobile") || null,
     });
-    console.log(profileData);
+    console.log("profiledata",profileData);
     if (profileData.data.type === "error") {
       this.LogUserOut(profileData.data.message);
       return;
@@ -114,7 +114,7 @@ export default class ProfilePage extends Component {
 
     const LeadsData = await api.getLeadsData({ Username: this.state.Username });
     console.log(LeadsData);
-    this.setState({ LeadsCount: LeadsData.data.result.LeadsCount });
+    this.setState({ LeadsCount: LeadsData.data.result?.LeadsCount });
 
     const Notifications = await NotificationApi.getAllNotification({
       Username: this.state.Username,
@@ -129,8 +129,8 @@ export default class ProfilePage extends Component {
       Username: this.state.Username,
     });
     this.setState({
-      FollowersCount: FollowerData.data.data.FollowersCount,
-      FollowingCount: FollowerData.data.data.FollowingCount,
+      FollowersCount: FollowerData.data.data?.FollowersCount,
+      FollowingCount: FollowerData.data.data?.FollowingCount,
     });
 
     const PostsData = await api.getPostsData({ Username: this.state.Username });
@@ -311,9 +311,12 @@ export default class ProfilePage extends Component {
                   }
                 >
                   <LastPortion Professions={this.state.Profession} />
+              
                   <div style={{marginTop: '25px'}}>
                   <Button variant="contained" style={{fontSize: '16px',fontFamily:"'Baloo Bhai 2', 'cursive'"}} onClick={this.GetOrders}>My Orders</Button>
+                 
                   </div>
+              
                 </div>
                 <div
                   style={

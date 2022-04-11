@@ -115,6 +115,7 @@ function Navbar(props) {
 
   const editProfile = () => {
     // TODO :
+    window.location.href = "/editprofile";
   };
 
   const handleMenuClick = (e) => {
@@ -158,7 +159,7 @@ function Navbar(props) {
     <div
       className={`d-flex align-items-center px-3 bg-white justify-content-between NavbarUnlocked`}
     >
-      <Link to={"/feed"}>
+      <Link to="/feed">
         <img src={Adoose} alt="logo" style={{ height: "3.75rem" }} />
       </Link>
       {window.innerWidth > 600 ? (

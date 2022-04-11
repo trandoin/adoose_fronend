@@ -76,11 +76,14 @@ PasswordContent = (
     {
         const data = await api.setnewpassword({id:this.props.match.params.id,newpassword:Password1});
         this.setState({SnackbarOpen:true,AlertSeverity:data.data.type,AlertText:data.data.message});
+        window.location.href = '/signin';
     }
     else
     {
       this.setState({SnackbarOpen:true,AlertSeverity:'error',AlertText:'Passwords do not match or invalid'});
     }
+
+   
   }
 
   render() {

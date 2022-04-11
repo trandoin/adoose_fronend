@@ -246,12 +246,14 @@ class Login extends Component {
         Username = Email;
         Email = null;
       }
-      
+
+
       let dataToSend = { Password: Password };
       if (Email != null) dataToSend.Email = Email.toLowerCase();
       else if (Username != null) dataToSend.Username = Username;
       else if (Mobile != null) dataToSend.Mobile = Mobile;
      
+
       const data = await api.login(dataToSend);
       console.log(data);
 
@@ -289,7 +291,7 @@ class Login extends Component {
   responseGoogleOnFailure = (response) => {
     console.log(response);
     console.log(response.profile)
-    alert('Error while Loggin In')
+    // alert('Error while Loggin In')
     //TODO : When user log in is a failure.
   };
 
@@ -416,19 +418,23 @@ class Login extends Component {
               /> */}
                <GoogleLogin 
                                 // clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
-                                clientId='833096552251-pgm8npcds8dg5tdei0tf4meia4v40j19.apps.googleusercontent.com'
+                                // clientId='833096552251-pgm8npcds8dg5tdei0tf4meia4v40j19.apps.googleusercontent.com'
+                                clientId='15465852766-2orbt8pkp9u8dce1q2leh1637u5en65k.apps.googleusercontent.com'
                                 prompt='consent'
                                 buttonText={<b>{this.state.GoogleLoginText}</b>}
                                 // className="GoogleLoginbutton"
                                 onSuccess={this.responseGoogleOnSuccess}
                                 onFailure={this.responseGoogleOnFailure}
-                                cookiePolicy='single_host_origin'
+                                cookiePolicy='single_host_origin' 
                             />
             </div>
 
             <div style={{ marginLeft: "1rem" }}>
+            {/* 262281679453562 */}
+        
+            asdbsabdjabdkjbd
               <FacebookLogin
-                appId="1239258649891178"
+                appId={process.env.REACT_APP_FB_AUTH_ID}
                 autoLoad={true}
                 fields="email"
                 size="small"
@@ -438,6 +444,7 @@ class Login extends Component {
                 textButton={this.state.FacebookLoginText}
               />
             </div>
+            
           </div>
 
           <Divider plain>
@@ -445,7 +452,7 @@ class Login extends Component {
             <this.greyDesc>or</this.greyDesc>{" "}
           </Divider>
 
-          <form action="/login" method="POST" onSubmit={this.formOnSubmit}>
+          <form method="POST" onSubmit={this.formOnSubmit}>
             <this.FieldLabel>
               Email address / Mobile Number / Username
             </this.FieldLabel>

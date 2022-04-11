@@ -134,11 +134,13 @@ class Register extends Component {
 
     responseGoogleOnFailure = (response)=>{
         //TODO : When user sign on is a failure.
-        alert('Error while Sign Up')
+        // alert('Error while Sign Up')
+        console.log("error");
     }
 
     responseFacebook = response =>{
         //TODO : when user sign on using facebook
+        console.log("yes this is facebook",response);
     }
 
     TermsAndConditionChange = async()=>{
@@ -226,6 +228,8 @@ class Register extends Component {
                         </div>
 
                         <div style={{marginLeft:'1rem'}}>
+
+                            {console.log("appid",process.env.REACT_APP_FB_AUTH_ID)}
                             <FacebookLogin
                                 appId={process.env.REACT_APP_FB_AUTH_ID}
                                 autoLoad = {true}

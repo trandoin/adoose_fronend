@@ -157,7 +157,7 @@ export default class ProfileCreation extends Component {
     }
 
     // TODO: 
-    workDetails = async(e)=>{
+    workDetails = async (e)=>{
         e.preventDefault();
         const workTitle = e.target.workTitle.value;
         const workDesc = e.target.workDesc.value;
@@ -204,6 +204,7 @@ export default class ProfileCreation extends Component {
     }
 
     SwitchRightPart = props =>{
+        console.log("props",props,props.x)
         switch (props.x) {
             case 0:
                 return (
@@ -218,10 +219,12 @@ export default class ProfileCreation extends Component {
             case 1:
                 return (
                     <div>
+                     
                         <div style={{fontSize:'1.3rem'}}>Account's Important Information</div>
                         <div style={{color:'#888', fontWeight:'400'}}>Try to make it unique and cool. People will get to know you by your username</div>
                         <br />
-                        <this.FieldLabel style={{color:this.state.Username!=null?"#888":'black'}}>Username</this.FieldLabel>
+                        
+                        <div style={{color:this.state.Username!=null?"#888":'black',fontWeight:500,fontSize: '1.1rem', margin:'0.5rem 0'}}>Username</div>
                         <TextField style={{color:'black'}} variant='outlined' color='primary' size='small' fullWidth  type="text" placeholder='elon_musk' name='Username' required onChange={(e)=>{this.usernameIschanging(e.target.value)}} error={this.state.usernameError} value={this.state.Username}
                         InputProps={{ startAdornment: (<InputAdornment position="start"><VscSymbolNamespace size='1.3em' /></InputAdornment>), endAdornment:(<InputAdornment position='end'>{this.state.usernameLoading===true?<RiLoader2Line size='1.3em' />:<></>}</InputAdornment>)}} />
                     </div>
@@ -247,11 +250,13 @@ export default class ProfileCreation extends Component {
             case 3:
                 return (
                     <div>
+                  
                         <div style={{fontSize:'1.3rem'}}>Tell us what you are best at.</div>
                         <div style={{color:'#888', fontWeight:'400'}}>You can write atmost 3 professions.</div>
 
                         <div className="d-flex align-items-center">
-                            <this.FieldLabel style={{color:this.state.Username!=null?"#888":'black'}}>Select Professions</this.FieldLabel>
+                            {/* <this.FieldLabel style={{color:this.state.Username!=null?"#888":'black'}}>Select Professions</this.FieldLabel> */}
+                            <div style={{color:this.state.Username!=null?"#888":'black',fontWeight:500,fontSize: '1.1rem', margin:'0.5rem 0'}}>Select Professions</div>
                             <span style={{color:'green'}} className='ms-auto'><b>{this.state.Profession.length}/3</b></span>
                         </div>
                         <Dropdown
@@ -301,7 +306,7 @@ export default class ProfileCreation extends Component {
                             <b>My work</b>
                         </div>
                         <ol className='m-0 p-0 my-2'>
-                        <li className='my-2' style={{listStyleType:'none'}} className='border m- p-2'>
+                        <li  style={{listStyleType:'none'}} className='border my-2 p-2'>
                             <div className='d-flex align-items-center'>
                                 <b>{this.state.work[0]}</b>
                                 <Button className='ms-auto' type='danger' onClick={()=>{this.DeleteWork()}}>Delete</Button>
@@ -360,11 +365,13 @@ export default class ProfileCreation extends Component {
             case 6:
                 return (
                     <div>
+                     
                         <div style={{fontSize:'1.3rem'}}>Tell us what you can speak.</div>
                         <div style={{color:'#888', fontWeight:'400'}}>You can write atmost 3 Languages.</div>
 
                         <div className='d-flex align-items-center'>
-                            <this.FieldLabel>Select Languages</this.FieldLabel>
+                        <div style={{color:'black',fontWeight:500,fontSize: '1.1rem', margin:'0.5rem 0'}}>Select Languages</div>
+                            {/* <this.FieldLabel>Select Languages</this.FieldLabel> */}
                             <span style={{color:'green'}} className='ms-auto'><b>{this.state.Language.length}/3</b></span>
                         </div>
                         <Dropdown
@@ -383,12 +390,13 @@ export default class ProfileCreation extends Component {
             case 7:
                 return (
                     <div>
+                  
                         <div style={{fontSize:'1.3rem'}}>Tell us where you are.</div>
                         <div style={{color:'#888', fontWeight:'400'}}>You can write atmost 3 Locations.</div>
 
                         
-                        <this.FieldLabel>Select Locations</this.FieldLabel>
-                        
+                        {/* <this.FieldLabel>Select Locations</this.FieldLabel> */}
+                        <div style={{color:'black',fontWeight:500,fontSize: '1.1rem', margin:'0.5rem 0'}}>Select Locations</div>
                         
                         <Dropdown
                             placeholder='Location'
@@ -640,12 +648,14 @@ export default class ProfileCreation extends Component {
     }
 
     RightPart = props =>{
+     
 
         return (
             <div style={{boxShadow:'0 0 8px #bbb',boxSizing:'border-box',margin:'0.5rem'}}>
                 <div style={{fontSize:'1.6rem', padding:'1.5rem', background:'rgb(249,249,249)',borderBottom:'1px solid #ccc'}}>{props.text}</div>
                 <div style={{ padding:'1.5rem', background:'white'}}>
-                    <this.SwitchRightPart x = {props.x} />
+                    {this.SwitchRightPart({x:props.x})}
+                    {/* <this.SwitchRightPart x = {props.x} /> */}
                     <div style={{marginTop:'0.5rem' ,color:'darkred', fontWeight:'500', opacity:this.state.GeneralEmptinessError===true?'1':'0'}}>Fill in the required Fields to proceed</div>
                 </div>
                 <hr style={{marginTop:'0'}} />
@@ -664,6 +674,8 @@ export default class ProfileCreation extends Component {
             <div>
                 <Snackbar open={this.state.SnackbarOpen} autoHideDuration={5000} onClose={this.autoCloseSnackbar}>
                     <this.AlertMiUi  onClose={this.autoCloseSnackbar} severity={this.state.AlertSeverity}>{this.state.AlertText}</this.AlertMiUi>
+                   
+               
                 </Snackbar>
 
                 {
@@ -675,37 +687,47 @@ export default class ProfileCreation extends Component {
 
                 <div className='m-auto m-4' style={{maxWidth:'1000px'}} >
                     {
-                        this.state.loading==false?
+                        this.state.loading == false ?
                         <Tabs activeKey = {String(this.state.filledCount)} tabPosition={this.state.mode} onTabClick = {null}>
                             <TabPane tab={<LeftPart x={0} text={"Getting Started"} filledCount={this.state.filledCount} />} key="0">
-                                <this.RightPart x = {0} text={"Getting Started"} />
+                                {this.RightPart({x:0,text:'Getting Started'})}
+                                {/* <this.RightPart x = {0} text={"Getting Started"} /> */}
                             </TabPane>
                              <TabPane tab={<LeftPart x={1} text={"Account"}  filledCount={this.state.filledCount} />} key="1">
-                                <this.RightPart x = {1} text={"Account"} />
+                             {this.RightPart({x:1,text:'Account'})}
+                                {/* <this.RightPart x = {1} text={"Account"} /> */}
                             </TabPane>
                             <TabPane tab={<LeftPart x={2} text={"Gender"} filledCount={this.state.filledCount} />} key="2">
-                                <this.RightPart x = {2} text={"Gender"} />
+                            {this.RightPart({x:2,text:'Gender'})}
+                                {/* <this.RightPart x = {2} text={"Gender"} /> */}
                             </TabPane>
                             <TabPane tab={<LeftPart x={3} text={"Profession"} filledCount={this.state.filledCount} />} key="3">
-                                <this.RightPart x = {3} text={"Profession"} />
+                            {this.RightPart({x:3,text:'Profession'})}
+                                {/* <this.RightPart x = {3} text={"Profession"} /> */}
                             </TabPane>
                             <TabPane tab={<LeftPart x={4} text={"Overview"} filledCount={this.state.filledCount} />} key="4">
-                                <this.RightPart x = {4} text={"Overview"} />
+                            {this.RightPart({x:4,text:'Overview'})}
+                                {/* <this.RightPart x = {4} text={"Overview"} /> */}
                             </TabPane>
                             <TabPane tab={<LeftPart x={5} text={"Work"} filledCount={this.state.filledCount} />} key="5">
-                                <this.RightPart x = {5} text={"Work"} />
+                            {this.RightPart({x:5,text:'Work'})}
+                                {/* <this.RightPart x = {5} text={"Work"} /> */}
                             </TabPane>
                             <TabPane tab={<LeftPart x={6} text={"Language"} filledCount={this.state.filledCount} />} key="6">
-                                <this.RightPart x = {6} text={"Language"} />
+                            {this.RightPart({x:6,text:'Language'})}
+                                {/* <this.RightPart x = {6} text={"Language"} /> */}
                             </TabPane>
                             <TabPane tab={<LeftPart x={7} text={"Location"} filledCount={this.state.filledCount} />} key="7">
-                                <this.RightPart x = {7} text={"Location"} />
+                            {this.RightPart({x:7,text:'Location'})}
+                                {/* <this.RightPart x = {7} text={"Location"} /> */}
                             </TabPane>
                             <TabPane tab={<LeftPart x={8} text={"Social Media"} filledCount={this.state.filledCount} />} key="8">
-                                <this.RightPart x = {8} text={"Social Media"} />
+                            {this.RightPart({x:8,text:'Social Media'})}
+                                {/* <this.RightPart x = {8} text={"Social Media"} /> */}
                             </TabPane>
                             <TabPane tab={<LeftPart x={9} text={"Profile Photo"} filledCount={this.state.filledCount} />} key="9">
-                                <this.RightPart x = {9} text={"Profile Photo"} />
+                            {this.RightPart({x:9,text:'Profile Photo'})}
+                                {/* <this.RightPart x = {9} text={"Profile Photo"} /> */}
                             </TabPane>
 
 

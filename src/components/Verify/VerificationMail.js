@@ -72,6 +72,7 @@ PasswordContent = (
       const data = await api.verification({id : id});
       console.log(data);
       this.setState({SnackbarOpen:true,AlertSeverity:data.data.type,AlertText:data.data.message});
+      window.location.href = '/signin';
   }
 
   render() {
