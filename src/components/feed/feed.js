@@ -43,7 +43,7 @@ class Feed extends Component {
                 {
                     menuItem: <Menu.Item key='Timeline'><TabTopDesign value="Timeline" /></Menu.Item>,
                     render: () => <Tab.Pane attached={false} >
-                           <div style={{'marginBottom': '10px'}}>
+                           <div style={{'marginBottom': '10px'}} className="search_bar_feed">
     <form action="/" method="get"  onSubmit={this.formOnSubmit}>
       <label htmlFor="header-search">
           <span className="visually-hidden">Search Location</span>
@@ -67,7 +67,7 @@ class Feed extends Component {
                 {
                     menuItem: <Menu.Item key='Explore'><TabTopDesign value="Explore" /></Menu.Item>,
                     render: () => <Tab.Pane attached={false}>
-                       <div style={{'marginBottom': '10px'}}>
+                       <div style={{'marginBottom': '10px'}} className="search_bar_feed">
     <form action="/" method="get"  onSubmit={this.formOnSubmit}>
       <label htmlFor="header-search">
           <span className="visually-hidden">Search Location</span>
@@ -90,7 +90,7 @@ class Feed extends Component {
                 {
                     menuItem: <Menu.Item key='Collab'><TabTopDesign value="Collab" /></Menu.Item>,
                     render: () => <Tab.Pane attached={false}>
-                        <div style={{'marginBottom': '10px'}}>
+                        <div style={{'marginBottom': '10px'}} className="search_bar_feed">
     <form action="/" method="get"  onSubmit={this.formOnSubmit}>
       <label htmlFor="header-search">
           <span className="visually-hidden">Search Location</span>
@@ -100,7 +100,7 @@ class Feed extends Component {
           id="header-search"
           placeholder="Filter Location"
           name="s" 
-          style={{width:"300px"}}
+        //   style={{width:"300px"}}
       />
       <button type="submit">Search</button>
 
@@ -112,7 +112,7 @@ class Feed extends Component {
                 {
                     menuItem: <Menu.Item key='Requirement'><TabTopDesign value="Requirement" /></Menu.Item>,
                     render: () => <Tab.Pane attached={false}>
-                        <div style={{'marginBottom': '10px'}}>
+                        <div style={{'marginBottom': '10px'}} className="search_bar_feed">
     <form action="/" method="get"  onSubmit={this.formOnSubmit}>
       <label htmlFor="header-search">
           <span className="visually-hidden">Search Location</span>
@@ -134,7 +134,7 @@ class Feed extends Component {
                 {
                     menuItem: <Menu.Item key='Offer'><TabTopDesign value="Offer" /></Menu.Item>,
                     render: () => <Tab.Pane attached={false}>
-                        <div style={{'marginBottom': '10px'}}>
+                        <div style={{'marginBottom': '10px'}} className="search_bar_feed">
     <form action="/" method="get"  onSubmit={this.formOnSubmit}>
       <label htmlFor="header-search">
           <span className="visually-hidden">Search Location</span>

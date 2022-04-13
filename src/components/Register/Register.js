@@ -198,6 +198,10 @@ class Register extends Component {
         </ul>
       );
 
+    Facelogin =(e) =>{
+        console.log("target",e,e.target.appId);
+    }
+
     render() {
         return (
             
@@ -235,6 +239,7 @@ class Register extends Component {
                                 autoLoad = {true}
                                 fields="name,email,picture"
                                 size='small'
+                                onClick={this.Facelogin}
                                 icon= {<FaFacebook size='1.4em' />}
                                 className="FacebookLoginbutton"
                                 callback={this.responseFacebook} 

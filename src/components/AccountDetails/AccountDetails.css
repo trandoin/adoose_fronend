@@ -1,7 +1,41 @@
 .modal-input-box {
-    background: lightblue;
-    border-radius: 6px;
-    border: none;
-    color: var(--btn-text-color-primary);
-    width: 100%;
+  background: lightblue;
+  border-radius: 6px;
+  border: none;
+  color: var(--btn-text-color-primary);
+  width: 100%;
+}
+.modal_outer{
+  height:100vh;
+  width: 100%;
+  display:flex;
+  /* flex-direction:"column"; */
+  justify-content:center;
+  align-items:center;
+
+
+
+}
+.modal_inner{
+  width: 40%;
+  /* margin:"0px auto"; */
+  background: white;
+  border: 2px solid #000;
+  box-shadow: 24;
+  padding:20px;
+  /* padding: 4; */
+}
+
+@media screen and (max-width:1000px){
+  .modal_inner{
+    width: 90%;
+    margin:0px auto;
+    /* margin:"0px auto"; */
+    background: white;
+    border: 2px solid #000;
+    box-shadow: 24;
+    padding:20px;
+    /* padding: 4; */
   }
+}
+

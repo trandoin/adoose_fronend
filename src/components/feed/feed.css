@@ -1,5 +1,24 @@
+.search_bar_feed input {
+    width:30%;
+}
 @media screen and (max-width:1000px){
     .card_offer{
         margin-bottom: 130px;
     }
+
+    
+  
+        .search_bar_feed{
+            width:100%;   
+        }
+        .search_bar_feed form {
+            display: flex;
+            justify-content: center;
+        }
+        .search_bar_feed input{
+            width: 50% !important;
+         
+        }
+       
+     
 }

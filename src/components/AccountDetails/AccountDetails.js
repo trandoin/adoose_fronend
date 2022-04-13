@@ -7,12 +7,26 @@ import axios from 'axios';
 import TextField from '@mui/material/TextField';
 import './AccountDetails.css'
 
+const style1 = {
+  // position: 'absolute',
+  // top: '50%',
+  // left: '50%',
+  // transform: 'translate(-50%, -50%)',
+  display:'flex',
+  flexDirection:"column",
+  justifyContent:'center',
+  alignItems:"center",
+  height:'100%',
+  width: '100%',
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+};
 const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 600,
+ 
+  width: '80%',
+  margin:"0px auto",
   bgcolor: 'background.paper',
   border: '2px solid #000',
   boxShadow: 24,
@@ -32,7 +46,7 @@ export default function BasicModal() {
           name: e.target.name.value,
           ifsc: e.target.ifsc.value
       }
-      axios.post('http://localhost:5000/account/details',req)
+      axios.post('https://adoose-backend.herokuapp.com/account/details',req)
   }
 
   return (
@@ -43,8 +57,9 @@ export default function BasicModal() {
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
+        className="modal_outer"
       >
-        <Box sx={style}>
+        <Box className="modal_inner">
         <div style={{display: 'flex',justifyContent:'center',alignItems:'center',fontSize: '16px',fontFamily:"'Baloo Bhai 2', 'cursive'"}}>
           <Typography id="modal-modal-title" variant="h6" component="h2" >
             Please add your Account details

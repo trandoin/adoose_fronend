@@ -25,10 +25,35 @@
 .color1{
     background: linear-gradient(65deg,#72c9e4 48%,white 48% 52% );
 }
+.image-fluid{
+    height:500px;
+    width: 500px;
+}
 
 @keyframes movement-up {
     0%   {transform: translateY(0px);}
     /* 25%  {background-color: yellow;} */
     50%  {transform: translateY(13px);}
     100% {transform: translateY(0px);}
+  }
+
+
+  @media screen and (max-width:990px){
+      .get_start{
+          width:100%;
+          display: flex;
+          justify-content: center;
+        
+      }
+      .get_start a{
+        width: 200px;
+      }
+      .header-img{
+          display: flex;
+          justify-content: center;
+      }
+      .image-fluid{
+        height:250px;
+        width: 250px;
+    }
   }
