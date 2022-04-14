@@ -198,9 +198,7 @@ class Register extends Component {
         </ul>
       );
 
-    Facelogin =(e) =>{
-        console.log("target",e,e.target.appId);
-    }
+  
 
     render() {
         return (
@@ -232,9 +230,14 @@ class Register extends Component {
                         </div>
 
                         <div style={{marginLeft:'1rem'}}>
+                        <FacebookLogin
+                        appId="675336087057103"
+                        autoLoad={true}
+                        fields="name,email,picture"
+                    
+                        callback={this.responseFacebook} />
 
-                            {console.log("appid",process.env.REACT_APP_FB_AUTH_ID)}
-                            <FacebookLogin
+                            {/* <FacebookLogin
                                 appId={process.env.REACT_APP_FB_AUTH_ID}
                                 autoLoad = {true}
                                 fields="name,email,picture"
@@ -244,7 +247,7 @@ class Register extends Component {
                                 className="FacebookLoginbutton"
                                 callback={this.responseFacebook} 
                                 textButton={this.state.FacebookLoginText}
-                                />
+                                /> */}
                         </div>
                     </div>
 
