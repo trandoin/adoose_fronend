@@ -22,8 +22,8 @@ class Login extends Component {
     this.state = {
       windowWidth: 0,
       windowHeight: 0,
-      GoogleLoginText: "Sign up with Google",
-      FacebookLoginText: "Sign up with Facebook",
+      GoogleLoginText: "Sign In with Google",
+      FacebookLoginText: "Sign In with Facebook",
       AlertSeverity: "error",
       SnackbarOpen: false,
       SnackbarOpen2: false,
@@ -40,13 +40,13 @@ class Login extends Component {
     let x = window.innerWidth;
     let y = window.innerHeight;
     this.setState({ windowWidth: x, windowHeight: y });
-    let g = "Sign up with Google";
-    let f = "Sign up with Facebook";
+    let g = "Sign In with Google";
+    let f = "Sign In with Facebook";
     if (x > 800) this.setState({ GoogleLoginText: g, FacebookLoginText: f });
     else
       this.setState({
-        GoogleLoginText: "Sign up",
-        FacebookLoginText: "Sign up",
+        GoogleLoginText: "Sign In",
+        FacebookLoginText: "Sign In",
       });
   };
 
@@ -295,9 +295,83 @@ class Login extends Component {
     //TODO : When user log in is a failure.
   };
 
-  responseFacebook = (response) => {
+  responseFacebook = async (response) => {
     //TODO : when user log in using facebook
-    console.log(response)
+   
+    let Email = response.email
+    const Password = "null";
+
+
+   const usernameRegex = /^[a-zA-Z_-][a-z0-9_-]{3,15}$/;
+   const emailRegex = /[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/;
+   const mobileRegex =
+     /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/;
+   const passwordRegex =
+     /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/;
+
+   if (
+     emailRegex.test(Email) === false &&
+     mobileRegex.test(Email) === false &&
+     usernameRegex.test(Email) === false
+   )
+     this.setState({
+       AlertText:
+         "Please input a valid email address or mobile number or username",
+       AlertSeverity: "error",
+       SnackbarOpen: true,
+     });
+   else {
+     let Mobile = null;
+     if (mobileRegex.test(Email) === true) {
+       Mobile = Email;
+       Email = null;
+     }
+
+     let Username = null;
+     if (usernameRegex.test(Email) === true) {
+       Username = Email;
+       Email = null;
+     }
+
+
+     let dataToSend = { Password: Password };
+     if (Email != null) dataToSend.Email = Email.toLowerCase();
+     else if (Username != null) dataToSend.Username = Username;
+     else if (Mobile != null) dataToSend.Mobile = Mobile;
+    
+
+     const data = await api.login(dataToSend);
+     console.log(data);
+
+     if (data.data.message === undefined)
+       this.setState({ SnackbarOpen2: true });
+     else
+       this.setState({
+         SnackbarOpen: true,
+         AlertSeverity: data.data.type,
+         AlertText: data.data.message,
+       });
+
+     if (data.data.type === "success") {
+       console.log(data.data);
+       await localStorage.setItem(
+         process.env.REACT_APP_AuthTokenKey,
+         data.data.Token
+       );
+       await localStorage.setItem("Email", data.data.user.Email);
+       await localStorage.setItem("Username", data.data.user.Username);
+       if (data.data.user.filled === false) {
+         setTimeout(() => {
+           window.location.href = "/create-your-profile";
+           // this.props.history.push('/create-your-profile');
+         }, 1000);
+       } else {
+         setTimeout(() => {
+           window.location.href = "/feed";
+         }, 1000);
+       }
+     }
+   }
   };
 
   autoCloseSnackbar = (event, reason) => {

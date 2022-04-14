@@ -138,9 +138,45 @@ class Register extends Component {
         console.log("error");
     }
 
-    responseFacebook = response =>{
-        //TODO : when user sign on using facebook
-        console.log("yes this is facebook",response);
+    responseFacebook = async (response) => {
+    
+        console.log(response);
+      
+
+     
+
+        const emailRegex = /[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/;
+        const mobileRegex = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/;
+        
+        let Email = response.email
+        const Password = "null";
+        const FirstName = response.name;
+        const LastName ="";
+
+        if(emailRegex.test(Email)===false && mobileRegex.test(Email)===false)   this.setState({AlertText:'Please input a valid email address or mobile number',AlertSeverity:'error',SnackbarOpen:true})
+        else{
+            let Mobile = null;
+            if(mobileRegex.test(Email)===true)  {Mobile=Email;Email=null;}
+
+            let dataToSend = {Password : Password,Name:FirstName+" "+LastName};
+            if(Mobile!=null)    dataToSend.Mobile = Mobile;
+            else if(Email!=null)    dataToSend.Email = Email.toLowerCase();
+
+            const data = await api.register(dataToSend);
+            console.log(data);
+            if(data.data.type==='error')        this.setState({SnackbarOpen:true,AlertText:data.data.message,AlertSeverity:'error'});
+            else
+            {
+                await this.setState({SnackbarOpen:true,AlertText:data.data.message,AlertSeverity:'success'});
+                await localStorage.setItem("tech",data.data.tech);
+                setTimeout(() => {
+                    this.props.history.push('/signin');
+                }, 2*1000);
+            }
+        }
+
+
+
     }
 
     TermsAndConditionChange = async()=>{
@@ -230,14 +266,9 @@ class Register extends Component {
                         </div>
 
                         <div style={{marginLeft:'1rem'}}>
-                        <FacebookLogin
-                        appId="675336087057103"
-                        autoLoad={true}
-                        fields="name,email,picture"
-                    
-                        callback={this.responseFacebook} />
+                     
 
-                            {/* <FacebookLogin
+                            <FacebookLogin
                                 appId={process.env.REACT_APP_FB_AUTH_ID}
                                 autoLoad = {true}
                                 fields="name,email,picture"
@@ -247,7 +278,7 @@ class Register extends Component {
                                 className="FacebookLoginbutton"
                                 callback={this.responseFacebook} 
                                 textButton={this.state.FacebookLoginText}
-                                /> */}
+                                />
                         </div>
                     </div>
 

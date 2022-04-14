@@ -18,6 +18,7 @@ import Home from './HomePage/home';
 import Orders from './components/MyOrders/MyOrders'
 import EditProfile from './components/Profile/EditProfile';
 
+
 const App = () => { 
 
 
@@ -50,7 +51,9 @@ const App = () => {
               <Route exact path='/user/forget/:id' component={ForgetPassword} />
               <Route exact path='/user/verification/:id' component={VerificationMail} />
               <Route exact path='/support' component={Support} />
+          
               <Route path='/' render={()=><Redirect to='/' />} />
+          
             </Switch>
           :
           <>

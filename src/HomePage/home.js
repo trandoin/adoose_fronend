@@ -17,9 +17,9 @@ const Home = () => {
                         <div className="row mt-5 d-flex align-items-center  ">
                             <div className="col-md-5 pt-5 order-2 order-lg-1" >
                                 <h1 className="hei1"> Get Highly skilled professional for your valuable work </h1>
-                                <h5 className="my-3 hei2"> A platform for organisation, freelancers and skilled people who wanted to work and hire professionals for their work.</h5>
+                                <h5 className="my-3 hei2" style={{fontSize:"23px"}}> A platform for organisation, freelancers and skilled people who wanted to work and hire professionals for their work.</h5>
                                 <div className=" get_start">
-                                    <a href="#" type="button" className="btn btn-light " onClick={clicked}> Start Now</a>
+                                    <a href="#" type="button" className="btn btn-light px-4" onClick={clicked}> Start Now</a>
                                 </div>
                             </div>
 
