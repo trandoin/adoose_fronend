@@ -147,7 +147,7 @@ export default function SelectedChat(props) {
         const req = {
           'Fee':fee
         }
-        var data = await axios.post("http://localhost:5000/razorpay",req);
+        var data = await axios.post("https://adoose-backend.herokuapp.com/razorpay",req);
     
          console.log(data.data)
          data = data.data
@@ -155,7 +155,9 @@ export default function SelectedChat(props) {
          const NetAmount = 0.9 * fee;
          console.log(NetAmount)
         const options = {
-          key: "rzp_test_ejKxxUmceahR6k",
+          "key": "rzp_live_kgU0v3G5FqCKyR",   
+      "key_id": "rzp_live_kgU0v3G5FqCKyR", 
+      "key_secret":"MlKsvr1tCHAuXnRPfcT9YTzU", 
           currency: data.currency,
           amount: data.amount,
           order_id: data.id,
@@ -163,7 +165,7 @@ export default function SelectedChat(props) {
           description: "Thank you choosing Razorpay",
           handler: async function (response) {
             const res = await axios.post(
-              "http://localhost:5000/payment/verify",
+              "https://adoose-backend.herokuapp.com/payment/verify",
               response
             );
             if (res.signatureIsValid == "false") {
@@ -174,7 +176,7 @@ export default function SelectedChat(props) {
                 Username2: localStorage.getItem("Username"),
                 NetAmount: NetAmount
               }
-              axios.post("http://localhost:5000/orders/add",req)
+              axios.post("https://adoose-backend.herokuapp.com/orders/add",req)
               window.location.href = '/videocall'
             }
           },
@@ -208,7 +210,7 @@ export default function SelectedChat(props) {
     return (
         <div className="d-flex flex-column" style={{height:'100vh'}}>
             <div className="px-3 w-100 py-3 d-flex align-items-center" style={{height:'4rem',background:'#ccc', position:'sticky', top:'0'}}>
-                <span style={{width:'3rem', height:'3rem', borderRadius:'50%'}}><img src={`https://firebasestorage.googleapis.com/v0/b/adoose-cea6c.appspot.com/o/${props.chat["person"]}%2FprofilePic%2Fimage?alt=media&token=37c010fc-c25e-4bb3-a366-a7965a695f9b`} style={{borderRadius:'50%' , width:'100%', height:'100%'}} /></span>
+                <span style={{width:'3rem', height:'3rem', borderRadius:'50%'}}><img src={`https://firebasestorage.googleapis.com/v0/b/adoose-94825.appspot.com/o/${props.chat["person"]}%2FprofilePic%2Fimage?alt=media`} style={{borderRadius:'50%' , width:'100%', height:'100%'}} /></span>
                 <span className="ms-2" style={{fontWeight:'600', fontSize:'1.2rem'}}>{props.chat["person"]}</span>
                 <Button className="ms-auto" style={{background:'transparent'}} onClick={handleClickOpen}>Superchat</Button>
             

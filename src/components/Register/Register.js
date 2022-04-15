@@ -270,7 +270,7 @@ class Register extends Component {
 
                             <FacebookLogin
                                 appId={process.env.REACT_APP_FB_AUTH_ID}
-                                autoLoad = {true}
+                                // autoLoad = {true}
                                 fields="name,email,picture"
                                 size='small'
                                 onClick={this.Facelogin}

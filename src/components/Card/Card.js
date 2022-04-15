@@ -77,13 +77,15 @@ export default function Card(props){
 function SingleCard(props) {
 
     const [fullView, changeFullView] = React.useState(false);
-    console.log("this is new one ",props);
+
+
     
     if(props.data.Type==="Collaboration")
     {
-        
-    return (<>
-        <div style={{fontSize:'1.2rem',margin:'0.5rem',marginTop:'0',zIndex:'-1','position': 'relative'}} className="mr-1 p-1 postCardsData">
+ 
+        // `https://firebasestorage.googleapis.com/v0/b/adoose-3a465.appspot.com/o/${props.data["Username"]}%2FprofilePic%2Fimage?alt=media` 
+    return (
+        <div style={{fontSize:'1.2rem',margin:'0.5rem',marginTop:'0',zIndex:'-1'}} className="mr-1 p-1 postCardsData">
             <div className="d-flex p-2">
                 <div style={window.innerWidth>700?{width:'13%'}:{width:'25%'}}  className="d-flex">
                     <div className="d-flex flex-column align-items-center">
@@ -95,7 +97,7 @@ function SingleCard(props) {
                         </Label>
                         <div style={{width:'4rem', height:'4rem', marginTop:'0.7rem'}}>
                             <img style={{width:'100%', height:'100%',borderRadius:'50%', overflow:'hidden'}} 
-                            src={`https://firebasestorage.googleapis.com/v0/b/adoose-3a465.appspot.com/o/${props.data["Username"]}%2FprofilePic%2Fimage?alt=media`} />
+                            src={`https://firebasestorage.googleapis.com/v0/b/adoose-94825.appspot.com/o/${props.data["Username"]}%2FprofilePic%2Fimage?alt=media`} />
                         </div>
                     </div>
                 </div>
@@ -176,7 +178,7 @@ function SingleCard(props) {
                 null
             }
             </div>
-        </div></>
+        </div>
     )
 
         }
@@ -195,7 +197,7 @@ function SingleCard(props) {
                         </Label>
                         <div style={{width:'4rem', height:'4rem', marginTop:'0.7rem'}}>
                             <img style={{width:'100%', height:'100%',borderRadius:'50%', overflow:'hidden'}} 
-                            src={`https://firebasestorage.googleapis.com/v0/b/adoose-3a465.appspot.com/o/${props.data["Username"]}%2FprofilePic%2Fimage?alt=media`} />
+                               src={`https://firebasestorage.googleapis.com/v0/b/adoose-94825.appspot.com/o/${props.data["Username"]}%2FprofilePic%2Fimage?alt=media`}/>
                         </div>
                     </div>
                 </div>
@@ -286,6 +288,7 @@ function SingleCard(props) {
             )
         }
         else{
+      
             if(new Date(props.data.ValidUpto) > new Date() ){
             return (
                 <div style={{fontSize:'1.2rem',margin:'0.5rem',marginTop:'0',zIndex:'-1'}} className="mr-1 p-1 postCardsData">
@@ -297,7 +300,7 @@ function SingleCard(props) {
                         </Label>
                         <div style={{width:'4rem', height:'4rem', marginTop:'0.7rem'}}>
                             <img style={{width:'100%', height:'100%',borderRadius:'50%', overflow:'hidden'}} 
-                            src={`https://firebasestorage.googleapis.com/v0/b/adoose-3a465.appspot.com/o/${props.data["Username"]}%2FprofilePic%2Fimage?alt=media`} />
+                              src={`https://firebasestorage.googleapis.com/v0/b/adoose-94825.appspot.com/o/${props.data["Username"]}%2FprofilePic%2Fimage?alt=media`} />
                         </div>
                     </div>
                 </div>
@@ -379,9 +382,9 @@ function SingleCard(props) {
                 <div style={fullView?{display:'block',fontSize:'1rem'}:{display:'none',transition:'all 2s ease'}} className='p-3'>
                     {props.data["Description"]}
                 </div>
-                :
+                 :
                 null
-            }
+            } 
             </div>
         </div>
             )

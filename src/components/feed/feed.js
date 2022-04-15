@@ -58,7 +58,8 @@ class Feed extends Component {
       <button type="submit">Search</button>
 
   </form></div>
-  <div className='card_offer'> <Card data={this.state.TimeLineTab} group={this.state.AccountType} search_location={this.state.search_location} /> </div>
+  <div className='card_offer'>
+       <Card data={this.state.TimeLineTab} group={this.state.AccountType} search_location={this.state.search_location} /> </div>
                           
                        
 
@@ -176,7 +177,7 @@ class Feed extends Component {
     }
 
     componentDidMount=async()=>{
-        console.log(localStorage.getItem("Guest"))
+    
         this.setState({screenWidth : window.innerWidth});
         window.addEventListener('resize', this.resizeWindow);
         if(!localStorage.getItem("Guest")){
@@ -186,32 +187,30 @@ class Feed extends Component {
         localStorage.setItem("Username",profileData.data.user.Username)
         
         const Notifications = await NotificationApi.getAllNotification({Username:localStorage.getItem("Username")})
-        console.log(Notifications)
-        console.log(localStorage)
-        console.log(localStorage.getItem("Username"))
+    
      
         if(Notifications.data.Notifications) {
             this.setState({Notifications : Notifications.data.Notifications.data, UnreadNotifications : Notifications.data.Notifications.Unread});}
         }
        this.setState({loading:false});
         const feedData = await api.getPosts({Username:localStorage.getItem('Username'), number:this.state.skip});
-        console.log("feedData",feedData);
+     
         var fullDuniyaData = await api.getDuniyaPosts({skip : this.state.DuniyaSkip});
 
     
         this.setState({skip : 1, DuniyaSkip : 1});
-        console.log("fiss ",fullDuniyaData.data)
+
         const ActualDuniyaData ={
             data:[]
         };
         for(let i=0;i<fullDuniyaData.data.length;i++)
         {
             const Other_user = fullDuniyaData.data[i]["Username"];
-            console.log("users",Other_user);
+        
             const FollowerData = await FollowApi.getFollowData({Username: Other_user})
-            console.log(FollowerData.data.data)
+        
             const blocked_users = FollowerData.data.data?.Block;
-            console.log("bloack_user",blocked_users);
+          
             if(blocked_users && !blocked_users.includes(localStorage.getItem("Username"))) {    // if not blocked
 
                 ActualDuniyaData.data.push(fullDuniyaData.data[i]) 
@@ -242,10 +241,7 @@ class Feed extends Component {
         // const RequirementTab = fullDuniyaData.data.filter((item)=>item['Type']==="Requirement");
         // const OfferTab = fullDuniyaData.data.filter((item)=>item['Type']==="Offer");
 
-        console.log(CollabTab.length, RequirementTab.length, OfferTab.length);
-        console.log("yes",CollabTab);
-        console.log(RequirementTab);
-        console.log(OfferTab);
+   
         fullDuniyaData = ActualDuniyaData;
         this.setState({TimeLineTab : feedData.data.Posts});
         this.setState({ExploreTab : fullDuniyaData.data});
@@ -253,7 +249,7 @@ class Feed extends Component {
         this.setState({RequirementTab : RequirementTab});
         this.setState({OfferTab : OfferTab});
 
-        console.log("state value",this.state);
+
 
         fetchTimelineTimeout = await setInterval(async() => {
             let data = await api.getPosts({Username : localStorage.getItem("Username"), number: this.state.skip});
@@ -270,11 +266,11 @@ class Feed extends Component {
 
         fetchExploreTimeout = await setInterval(async() => {
             let data = await api.getDuniyaPosts({skip : this.state.DuniyaSkip});
-            console.log(`Asking for ${this.state.DuniyaSkip} times duniya`);
+   
             data = data.data;
             if(data.length===0){
                 clearInterval(fetchExploreTimeout);
-                console.log("out");
+           
                 return ;
             }
             const tt = this.state.ExploreTab;

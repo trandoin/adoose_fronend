@@ -509,7 +509,7 @@ class Login extends Component {
 
               <FacebookLogin
                 appId={process.env.REACT_APP_FB_AUTH_ID}
-                autoLoad={true}
+                // autoLoad={true}
                 fields="email"
                 size="small"
                 icon={<FaFacebook size="1.4em" />}

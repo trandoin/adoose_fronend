@@ -100,10 +100,10 @@ const EditProfile = () => {
 
     const  readImages = async(e)=>{
       const file = e.target.files[0];
+      
       if(!file)       return ;
       const images = ref(storage,`${state.edit_info?.Username}/profilePic/image`);
-      
-      console.log('image')
+    
       uploadBytes(images, file).then((snapshot) => {
           console.log(snapshot);
           getDownloadURL(images).then((url) => {
@@ -111,7 +111,9 @@ const EditProfile = () => {
 
               setstate({...state});
 
-            this.setState({ProfileImage:url})})
+            // this.setState({ProfileImage:url})
+          }
+            )
         })
         .catch((err)=>{
            console.log(err)
@@ -119,7 +121,6 @@ const EditProfile = () => {
      
   }   
 
- 
 
     return (
         <div
@@ -214,7 +215,7 @@ const EditProfile = () => {
                 </div>
                 <div className="form-group">
                     <label htmlFor="">Profile Image :</label>
-                    <input type="file" className='form-control' onchange={readImages} />
+                    <input type="file" className='form-control' onChange={readImages} />
                 </div>
                 <div className="form-group mt-3">
                     <button type="submit" className='btn btn-primary'>Edit Profile</button>
