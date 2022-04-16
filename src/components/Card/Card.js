@@ -59,9 +59,10 @@ function changeDateFormat(date){
 
 export default function Card(props){
 
-    console.log(props.data);
-    console.log(props.search_location)
+
     if(!props.data)     return <div></div>;
+
+
     const zx = props.data.map((item,index)=>{
 
    
@@ -69,9 +70,37 @@ export default function Card(props){
         {
             return <SingleCard AccountType={props.group} data={item} key={index} />;
         }
-            else    return null;
+        else    return null;
     })
-    return <div>{zx}</div>
+
+    return <div>{zx}</div> ;
+
+    // console.log("data",props.data.length)
+
+    // if(zx.length>0){
+    //     return <div>{zx}</div> ;
+    // }else{
+    //     // if(zx.length != 0 && props.data.length !=0){
+    //         // if(props.data.filter(doc == doc.Type == props.data.Type))
+    //         if(props.data.length != '' && zx.length ==0 ){
+    //             console.log("enter");
+    //             return <div className="wrapper">
+
+    //             <div className="card-loader card-loader--tabs"></div>
+    //             </div>;
+    //         }else{
+    //             console.log("not enter");
+    //             return '';
+    //         }
+       
+          
+
+    
+      
+    // }
+    
+
+  
 }
 
 function SingleCard(props) {

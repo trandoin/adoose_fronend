@@ -51,8 +51,8 @@ const Glogin = (props) => {
     return (<>
         <div style={{marginRight:'1rem'}}>
         <GoogleLogin 
-                // clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
-                clientId='833096552251-pgm8npcds8dg5tdei0tf4meia4v40j19.apps.googleusercontent.com'
+                clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
+                // clientId='833096552251-pgm8npcds8dg5tdei0tf4meia4v40j19.apps.googleusercontent.com'
                 prompt='consent'
                 buttonText={<b>Google</b>}
                 className="GoogleLoginbutton"

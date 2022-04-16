@@ -1,12 +1,12 @@
 {
   "files": {
-    "main.css": "/static/css/main.876e3b0d.chunk.css",
-    "main.js": "/static/js/main.58ead4e7.chunk.js",
+    "main.css": "/static/css/main.b3f75189.chunk.css",
+    "main.js": "/static/js/main.4d310730.chunk.js",
     "runtime-main.js": "/static/js/runtime-main.71c5bbf3.js",
     "static/css/2.1e3d13ce.chunk.css": "/static/css/2.1e3d13ce.chunk.css",
-    "static/js/2.4cc34f6e.chunk.js": "/static/js/2.4cc34f6e.chunk.js",
+    "static/js/2.42592c66.chunk.js": "/static/js/2.42592c66.chunk.js",
     "index.html": "/index.html",
-    "static/js/2.4cc34f6e.chunk.js.LICENSE.txt": "/static/js/2.4cc34f6e.chunk.js.LICENSE.txt",
+    "static/js/2.42592c66.chunk.js.LICENSE.txt": "/static/js/2.42592c66.chunk.js.LICENSE.txt",
     "static/media/VecotrImage3.04709daa.png": "/static/media/VecotrImage3.04709daa.png",
     "static/media/adoose.819eeb12.png": "/static/media/adoose.819eeb12.png",
     "static/media/semantic.min.css": "/static/media/outline-icons.ddae9b1b.woff",
@@ -16,8 +16,8 @@
   "entrypoints": [
     "static/js/runtime-main.71c5bbf3.js",
     "static/css/2.1e3d13ce.chunk.css",
-    "static/js/2.4cc34f6e.chunk.js",
-    "static/css/main.876e3b0d.chunk.css",
-    "static/js/main.58ead4e7.chunk.js"
+    "static/js/2.42592c66.chunk.js",
+    "static/css/main.b3f75189.chunk.css",
+    "static/js/main.4d310730.chunk.js"
   ]
 }

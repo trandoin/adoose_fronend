@@ -16,6 +16,7 @@ import {Link} from 'react-router-dom';
 import TabTopDesign from '../TabTopDesign';
 import { configConsumerProps } from 'antd/lib/config-provider';
 import './feed.css';
+import './feedcardload.scss';
 
 var fetchTimelineTimeout = null;
 var fetchExploreTimeout = null;
@@ -59,6 +60,7 @@ class Feed extends Component {
 
   </form></div>
   <div className='card_offer'>
+ 
        <Card data={this.state.TimeLineTab} group={this.state.AccountType} search_location={this.state.search_location} /> </div>
                           
                        
@@ -84,7 +86,7 @@ class Feed extends Component {
 
   </form></div>
   <div className='card_offer'>
-                        <Card data={this.state.ExploreTab} group={this.state.AccountType} search_location={this.state.search_location}/>
+                        <Card data={this.state.ExploreTab} CardType="Timeline" group={this.state.AccountType} search_location={this.state.search_location}/>
                         </div>
                     </Tab.Pane>,
                 },
@@ -106,7 +108,7 @@ class Feed extends Component {
       <button type="submit">Search</button>
 
   </form></div> <div className='card_offer'>
-                        <Card data={this.state.CollabTab} group={this.state.AccountType} search_location={this.state.search_location}/> 
+                        <Card data={this.state.CollabTab} CardType="collabartion" group={this.state.AccountType} search_location={this.state.search_location}/> 
 </div>
                     </Tab.Pane>,
                 },
@@ -128,7 +130,7 @@ class Feed extends Component {
       <button type="submit">Search</button>
 
   </form></div> <div className='card_offer'>
-                        <Card data={this.state.RequirementTab} group={this.state.AccountType} search_location={this.state.search_location} />
+                        <Card data={this.state.RequirementTab} CardType="Requirement" group={this.state.AccountType} search_location={this.state.search_location} />
 </div>
                     </Tab.Pane>,
                 },
@@ -150,7 +152,7 @@ class Feed extends Component {
       <button type="submit">Search</button>
 
   </form></div> <div className='card_offer'>
-                        <Card data={this.state.OfferTab} group={this.state.AccountType} search_location={this.state.search_location} /> 
+                        <Card data={this.state.OfferTab} CardType="Offer" group={this.state.AccountType} search_location={this.state.search_location} /> 
                         </div>
                     </Tab.Pane>,
                 },
@@ -183,7 +185,8 @@ class Feed extends Component {
         if(!localStorage.getItem("Guest")){
         const profileData = await api.getProfileData({Email:localStorage.getItem('Email'), Mobile : localStorage.getItem('Mobile')});
         if(profileData.data.user.type==='error')    {this.LogUserOut(profileData.data.message);  return ;  }
-        this.setState({...profileData.data.user,loading:false});
+        // ,loading:false
+        this.setState({...profileData.data.user});
         localStorage.setItem("Username",profileData.data.user.Username)
         
         const Notifications = await NotificationApi.getAllNotification({Username:localStorage.getItem("Username")})
@@ -192,7 +195,7 @@ class Feed extends Component {
         if(Notifications.data.Notifications) {
             this.setState({Notifications : Notifications.data.Notifications.data, UnreadNotifications : Notifications.data.Notifications.Unread});}
         }
-       this.setState({loading:false});
+     
         const feedData = await api.getPosts({Username:localStorage.getItem('Username'), number:this.state.skip});
      
         var fullDuniyaData = await api.getDuniyaPosts({skip : this.state.DuniyaSkip});
@@ -293,7 +296,7 @@ class Feed extends Component {
 
         }, 6000 );
 
-
+        this.setState({loading:false});
     
 
     }
@@ -348,7 +351,12 @@ class Feed extends Component {
             <button type="submit">Search</button>
 
         </form></div> */}
-                {this.state.loading?<></>
+                {this.state.loading?<>
+                <div className='loader_outer'>
+                   <h3>Welcome to Adoose.com</h3> 
+                    <div className="loader"></div></div>
+
+</>
                 :
                 <div style={{marginTop:'4rem'}}>
                     <div><Navbar Username={this.state.Username} Notifications={this.state.Notifications} Unread={this.state.UnreadNotifications} /></div>
