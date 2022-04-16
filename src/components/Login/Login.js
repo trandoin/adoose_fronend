@@ -16,6 +16,8 @@ import MuiAlert from "@material-ui/lab/Alert";
 
 import * as api from "../../api/Auth.js";
 
+import Glogin from './Glogin';
+
 class Login extends Component {
   constructor() {
     super();
@@ -482,14 +484,35 @@ class Login extends Component {
             style={{ marginTop: "3rem" }}
             className="d-flex align-items-center justify-content-around"
           >
-            <div style={{ marginRight: "1rem" }}>
-              {/* <GoogleLogin
-                clientId="658977310896-knrl3gka66fldh83dao2rhgbblmd4un9.apps.googleusercontent.com"
-                buttonText="Login"
-                onSuccess={this.responseGoogleOnSuccess}
-                onFailure={this.responseGoogleOnFailure}
-                cookiePolicy={"single_host_origin"}
-              /> */}
+               <div style={{marginRight:'1rem'}}>
+                            <GoogleLogin 
+                                    // clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
+                                    clientId='833096552251-pgm8npcds8dg5tdei0tf4meia4v40j19.apps.googleusercontent.com'
+                                    prompt='consent'
+                                    buttonText={<b>Google</b>}
+                                    className="GoogleLoginbutton"
+                                    onSuccess={this.responseGoogleOnSuccess}
+                                    onFailure={this.responseGoogleOnFailure}
+                                    cookiePolicy='single_host_origin'
+                                />
+                            </div>
+                            
+                            <div style={{marginLeft:'1rem'}}>
+                                        
+
+                                        <FacebookLogin
+                                            appId={process.env.REACT_APP_FB_AUTH_ID}
+                                            // autoLoad = {true}
+                                            fields="name,email,picture"
+                                            size='small'
+                                            icon= {<FaFacebook size='1.4em' />}
+                                            className="FacebookLoginbutton"
+                                            callback={this.responseFacebook} 
+                                            textButton="Facebook"
+                                            />
+                                    </div>
+            {/* <div style={{ marginRight: "1rem" }}>
+             
                <GoogleLogin 
                                 // clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
                                 // clientId='833096552251-pgm8npcds8dg5tdei0tf4meia4v40j19.apps.googleusercontent.com'
@@ -504,7 +527,7 @@ class Login extends Component {
             </div>
 
             <div style={{ marginLeft: "1rem" }}>
-            {/* 262281679453562 */}
+          
         
 
               <FacebookLogin
@@ -517,7 +540,7 @@ class Login extends Component {
                 callback={this.responseFacebook}
                 textButton={this.state.FacebookLoginText}
               />
-            </div>
+            </div> */}
             
           </div>
 

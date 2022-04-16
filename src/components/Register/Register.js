@@ -18,6 +18,8 @@ import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 
 import * as api from '../../api/Auth';
+import Glogin from '../Login/Glogin';
+import { CommentBank } from '@mui/icons-material';
 
 class Register extends Component {
 
@@ -30,6 +32,7 @@ class Register extends Component {
             FacebookLoginText : 'Sign up with Facebook',
             TermsAndConditionChange : false
         }
+    
     }
 
     AlertMiUi = props =>{
@@ -93,13 +96,12 @@ class Register extends Component {
         color: #9D0000;
     `;
 
-    responseGoogleOnSuccess = async(response)=>{
-        //TODO : When user sign on successfully using google sign in.
-        console.log(response);
-        console.log(response.profileObj);
 
-        console.log("coming");
+    // google login 
 
+
+     responseGoogleOnSuccess= async (response) =>{
+    
         const emailRegex = /[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/;
         const mobileRegex = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/;
         
@@ -108,43 +110,63 @@ class Register extends Component {
         const FirstName = response.profileObj.givenName;
         const LastName = response.profileObj.familyName;
 
-        if(emailRegex.test(Email)===false && mobileRegex.test(Email)===false)   this.setState({AlertText:'Please input a valid email address or mobile number',AlertSeverity:'error',SnackbarOpen:true})
+        if(emailRegex.test(Email)===false && mobileRegex.test(Email)===false)  
+        this.setState({AlertText:'Please input a valid email address or mobile number',AlertSeverity:'error',SnackbarOpen:true})
         else{
             let Mobile = null;
             if(mobileRegex.test(Email)===true)  {Mobile=Email;Email=null;}
 
-            let dataToSend = {Password : Password,Name:FirstName+" "+LastName};
+            let dataToSend = {Password : Password,Name:FirstName+" "+LastName,registertype:1};
             if(Mobile!=null)    dataToSend.Mobile = Mobile;
             else if(Email!=null)    dataToSend.Email = Email.toLowerCase();
 
             const data = await api.register(dataToSend);
             console.log(data);
-            if(data.data.type==='error')        this.setState({SnackbarOpen:true,AlertText:data.data.message,AlertSeverity:'error'});
+            if(data.data.type==='error')    this.setState({SnackbarOpen:true,AlertText:data.data.message,AlertSeverity:'error'});
             else
             {
-                await this.setState({SnackbarOpen:true,AlertText:data.data.message,AlertSeverity:'success'});
-                await localStorage.setItem("tech",data.data.tech);
-                setTimeout(() => {
-                    this.props.history.push('/signin');
-                }, 2*1000);
+                if (data.data.type === "success") {
+                    console.log(data.data);
+                    await localStorage.setItem(
+                      process.env.REACT_APP_AuthTokenKey,
+                      data.data.Token
+                    );
+                    await localStorage.setItem("Email", data.data.user.Email);
+                    await localStorage.setItem("Username", data.data.user.Username);
+                    if (data.data.user.filled === false) {
+                      setTimeout(() => {
+                        window.location.href = "/create-your-profile";
+                        // this.props.history.push('/create-your-profile');
+                      }, 1000);
+                    } else {
+                      setTimeout(() => {
+                        window.location.href = "/feed";
+                      }, 1000);
+                    }
+                  }
+               
+                // await this.setState({SnackbarOpen:true,AlertText:data.data.message,AlertSeverity:'success'});
+                // await localStorage.setItem("tech",data.data.tech);
+                // setTimeout(() => {
+                //     this.props.history.push('/signin');
+                // }, 2*1000);
             }
         }
 
+
+
+
     }
 
-    responseGoogleOnFailure = (response)=>{
-        //TODO : When user sign on is a failure.
-        // alert('Error while Sign Up')
-        console.log("error");
-    }
+    //facebook login
 
-    responseFacebook = async (response) => {
+     responseFacebook = async (response) => {
     
         console.log(response);
+        if(response.status == "unknown"){
+            return ;
+        }
       
-
-     
-
         const emailRegex = /[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/;
         const mobileRegex = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/;
         
@@ -158,7 +180,7 @@ class Register extends Component {
             let Mobile = null;
             if(mobileRegex.test(Email)===true)  {Mobile=Email;Email=null;}
 
-            let dataToSend = {Password : Password,Name:FirstName+" "+LastName};
+            let dataToSend = {Password : Password,Name:FirstName+" "+LastName,registertype:1};
             if(Mobile!=null)    dataToSend.Mobile = Mobile;
             else if(Email!=null)    dataToSend.Email = Email.toLowerCase();
 
@@ -167,17 +189,124 @@ class Register extends Component {
             if(data.data.type==='error')        this.setState({SnackbarOpen:true,AlertText:data.data.message,AlertSeverity:'error'});
             else
             {
-                await this.setState({SnackbarOpen:true,AlertText:data.data.message,AlertSeverity:'success'});
-                await localStorage.setItem("tech",data.data.tech);
-                setTimeout(() => {
-                    this.props.history.push('/signin');
-                }, 2*1000);
+                if (data.data.type === "success") {
+                    console.log(data.data);
+                    await localStorage.setItem(
+                      process.env.REACT_APP_AuthTokenKey,
+                      data.data.Token
+                    );
+                    await localStorage.setItem("Email", data.data.user.Email);
+                    await localStorage.setItem("Username", data.data.user.Username);
+                    if (data.data.user.filled === false) {
+                      setTimeout(() => {
+                        window.location.href = "/create-your-profile";
+                        // this.props.history.push('/create-your-profile');
+                      }, 1000);
+                    } else {
+                      setTimeout(() => {
+                        window.location.href = "/feed";
+                      }, 1000);
+                    }
+                  }
+                // await this.setState({SnackbarOpen:true,AlertText:data.data.message,AlertSeverity:'success'});
+                // await localStorage.setItem("tech",data.data.tech);
+                // setTimeout(() => {
+                //     this.props.history.push('/signin');
+                // }, 2*1000);
             }
         }
 
 
 
     }
+
+
+
+    // responseGoogleOnSuccess = async(response)=>{
+    //     //TODO : When user sign on successfully using google sign in.
+    //     console.log(response);
+    //     console.log(response.profileObj);
+
+    //     console.log("coming");
+
+    //     const emailRegex = /[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/;
+    //     const mobileRegex = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/;
+        
+    //     let Email = response.profileObj.email
+    //     const Password = "null";
+    //     const FirstName = response.profileObj.givenName;
+    //     const LastName = response.profileObj.familyName;
+
+    //     if(emailRegex.test(Email)===false && mobileRegex.test(Email)===false)   this.setState({AlertText:'Please input a valid email address or mobile number',AlertSeverity:'error',SnackbarOpen:true})
+    //     else{
+    //         let Mobile = null;
+    //         if(mobileRegex.test(Email)===true)  {Mobile=Email;Email=null;}
+
+    //         let dataToSend = {Password : Password,Name:FirstName+" "+LastName};
+    //         if(Mobile!=null)    dataToSend.Mobile = Mobile;
+    //         else if(Email!=null)    dataToSend.Email = Email.toLowerCase();
+
+    //         const data = await api.register(dataToSend);
+    //         console.log(data);
+    //         if(data.data.type==='error')        this.setState({SnackbarOpen:true,AlertText:data.data.message,AlertSeverity:'error'});
+    //         else
+    //         {
+    //             await this.setState({SnackbarOpen:true,AlertText:data.data.message,AlertSeverity:'success'});
+    //             await localStorage.setItem("tech",data.data.tech);
+    //             setTimeout(() => {
+    //                 this.props.history.push('/signin');
+    //             }, 2*1000);
+    //         }
+    //     }
+
+    // }
+
+    responseGoogleOnFailure = (response)=>{
+        //TODO : When user sign on is a failure.
+        // alert('Error while Sign Up')
+        console.log("error");
+    }
+
+    // responseFacebook = async (response) => {
+    
+    //     console.log(response);
+      
+
+     
+
+    //     const emailRegex = /[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/;
+    //     const mobileRegex = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/;
+        
+    //     let Email = response.email
+    //     const Password = "null";
+    //     const FirstName = response.name;
+    //     const LastName ="";
+
+    //     if(emailRegex.test(Email)===false && mobileRegex.test(Email)===false)   this.setState({AlertText:'Please input a valid email address or mobile number',AlertSeverity:'error',SnackbarOpen:true})
+    //     else{
+    //         let Mobile = null;
+    //         if(mobileRegex.test(Email)===true)  {Mobile=Email;Email=null;}
+
+    //         let dataToSend = {Password : Password,Name:FirstName+" "+LastName};
+    //         if(Mobile!=null)    dataToSend.Mobile = Mobile;
+    //         else if(Email!=null)    dataToSend.Email = Email.toLowerCase();
+
+    //         const data = await api.register(dataToSend);
+    //         console.log(data);
+    //         if(data.data.type==='error')        this.setState({SnackbarOpen:true,AlertText:data.data.message,AlertSeverity:'error'});
+    //         else
+    //         {
+    //             await this.setState({SnackbarOpen:true,AlertText:data.data.message,AlertSeverity:'success'});
+    //             await localStorage.setItem("tech",data.data.tech);
+    //             setTimeout(() => {
+    //                 this.props.history.push('/signin');
+    //             }, 2*1000);
+    //         }
+    //     }
+
+
+
+    // }
 
     TermsAndConditionChange = async()=>{
         const zx = this.state.TermsAndConditionChange;
@@ -203,7 +332,7 @@ class Register extends Component {
             let Mobile = null;
             if(mobileRegex.test(Email)===true)  {Mobile=Email;Email=null;}
 
-            let dataToSend = {Password : Password,Name:FirstName+" "+LastName};
+            let dataToSend = {Password : Password,Name:FirstName+" "+LastName,registertype:0};
             if(Mobile!=null)    dataToSend.Mobile = Mobile;
             else if(Email!=null)    dataToSend.Email = Email.toLowerCase();
 
@@ -234,6 +363,13 @@ class Register extends Component {
         </ul>
       );
 
+
+      GoogleLoginAndFacebookLogin = (response) =>{
+        console.log("res",response);
+      }
+ 
+
+    
   
 
     render() {
@@ -252,7 +388,34 @@ class Register extends Component {
                     </span>
                     
                     <div style={{marginTop:'3rem'}} className='d-flex align-items-center justify-content-around' >
-                        <div style={{marginRight:'1rem'}}>
+                    <div style={{marginRight:'1rem'}}>
+                            <GoogleLogin 
+                                    // clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
+                                    clientId='833096552251-pgm8npcds8dg5tdei0tf4meia4v40j19.apps.googleusercontent.com'
+                                    prompt='consent'
+                                    buttonText={<b>Google</b>}
+                                    className="GoogleLoginbutton"
+                                    onSuccess={this.responseGoogleOnSuccess}
+                                    onFailure={this.responseGoogleOnFailure}
+                                    cookiePolicy='single_host_origin'
+                                />
+                            </div>
+                            
+                            <div style={{marginLeft:'1rem'}}>
+                                        
+
+                                        <FacebookLogin
+                                            appId={process.env.REACT_APP_FB_AUTH_ID}
+                                            // autoLoad = {true}
+                                            fields="name,email,picture"
+                                            size='small'
+                                            icon= {<FaFacebook size='1.4em' />}
+                                            className="FacebookLoginbutton"
+                                            callback={this.responseFacebook} 
+                                            textButton="Facebook"
+                                            />
+                                    </div>
+                        {/* <div style={{marginRight:'1rem'}}>
                         <GoogleLogin 
                                 // clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
                                 clientId='833096552251-pgm8npcds8dg5tdei0tf4meia4v40j19.apps.googleusercontent.com'
@@ -279,7 +442,7 @@ class Register extends Component {
                                 callback={this.responseFacebook} 
                                 textButton={this.state.FacebookLoginText}
                                 />
-                        </div>
+                        </div> */}
                     </div>
 
                     <Divider plain> <this.greyDesc>or</this.greyDesc> </Divider>
