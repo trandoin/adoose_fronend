@@ -498,8 +498,6 @@ class Login extends Component {
                             </div>
                             
                             <div style={{marginLeft:'1rem'}}>
-                                        
-
                                         <FacebookLogin
                                             appId={process.env.REACT_APP_FB_AUTH_ID}
                                             // autoLoad = {true}
