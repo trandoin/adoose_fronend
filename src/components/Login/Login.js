@@ -354,8 +354,7 @@ class Login extends Component {
   //facebook login
 
   responseFacebook = async (response) => {
-    
-    console.log(response);
+  
     if(response.status == "unknown"){
         return ;
     }
@@ -363,50 +362,54 @@ class Login extends Component {
     const emailRegex = /[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/;
     const mobileRegex = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/;
     
-    let Email = response.email
+    let Email = response.email;
     const Password = "null";
     const FirstName = response.name;
     const LastName ="";
 
+    if(!Email){
+      this.setState({AlertText:'Please link your Facebook Account with Email or Login via Google',AlertSeverity:'error',SnackbarOpen:true});
+    }
+
     if(emailRegex.test(Email)===false && mobileRegex.test(Email)===false)   this.setState({AlertText:'Please input a valid email address or mobile number',AlertSeverity:'error',SnackbarOpen:true})
     else{
-        // let Mobile = null;
-        // if(mobileRegex.test(Email)===true)  {Mobile=Email;Email=null;}
+        let Mobile = null;
+        if(mobileRegex.test(Email)===true)  {Mobile=Email;Email=null;}
 
-        // let dataToSend = {Password : Password,Name:FirstName+" "+LastName,registertype:1};
-        // if(Mobile!=null)    dataToSend.Mobile = Mobile;
-        // else if(Email!=null)    dataToSend.Email = Email.toLowerCase();
+        let dataToSend = {Password : Password,Name:FirstName+" "+LastName,registertype:1};
+        if(Mobile!=null)    dataToSend.Mobile = Mobile;
+        else if(Email!=null)    dataToSend.Email = Email.toLowerCase();
 
-        // const data = await api.register(dataToSend);
-        // console.log(data);
-        // if(data.data.type==='error')        this.setState({SnackbarOpen:true,AlertText:data.data.message,AlertSeverity:'error'});
-        // else
-        // {
-        //     if (data.data.type === "success") {
-        //         console.log(data.data);
-        //         await localStorage.setItem(
-        //           process.env.REACT_APP_AuthTokenKey,
-        //           data.data.Token
-        //         );
-        //         await localStorage.setItem("Email", data.data.user.Email);
-        //         await localStorage.setItem("Username", data.data.user.Username);
-        //         if (data.data.user.filled === false) {
-        //           setTimeout(() => {
-        //             window.location.href = "/create-your-profile";
-        //             // this.props.history.push('/create-your-profile');
-        //           }, 1000);
-        //         } else {
-        //           setTimeout(() => {
-        //             window.location.href = "/feed";
-        //           }, 1000);
-        //         }
-        //       }
-        //     // await this.setState({SnackbarOpen:true,AlertText:data.data.message,AlertSeverity:'success'});
-        //     // await localStorage.setItem("tech",data.data.tech);
-        //     // setTimeout(() => {
-        //     //     this.props.history.push('/signin');
-        //     // }, 2*1000);
-        // }
+        const data = await api.register(dataToSend);
+        console.log(data);   
+        if(data.data.type==='error')        this.setState({SnackbarOpen:true,AlertText:data.data.message,AlertSeverity:'error'});
+        else
+        {
+            if (data.data.type === "success") {
+                console.log(data.data);
+                await localStorage.setItem(
+                  process.env.REACT_APP_AuthTokenKey,
+                  data.data.Token
+                );
+                await localStorage.setItem("Email", data.data.user.Email);
+                await localStorage.setItem("Username", data.data.user.Username);
+                if (data.data.user.filled === false) {
+                  setTimeout(() => {
+                    window.location.href = "/create-your-profile";
+                    // this.props.history.push('/create-your-profile');
+                  }, 1000);
+                } else {
+                  setTimeout(() => {
+                    window.location.href = "/feed";
+                  }, 1000);
+                }
+              }
+            // await this.setState({SnackbarOpen:true,AlertText:data.data.message,AlertSeverity:'success'});
+            // await localStorage.setItem("tech",data.data.tech);
+            // setTimeout(() => {
+            //     this.props.history.push('/signin');
+            // }, 2*1000);
+        }
     }
 
 

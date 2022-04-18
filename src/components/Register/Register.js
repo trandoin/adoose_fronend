@@ -162,7 +162,7 @@ class Register extends Component {
 
      responseFacebook = async (response) => {
     
-        console.log(response);
+    
         if(response.status == "unknown"){
             return ;
         }
@@ -174,6 +174,10 @@ class Register extends Component {
         const Password = "null";
         const FirstName = response.name;
         const LastName ="";
+        
+    if(!Email){
+        this.setState({AlertText:'Please link your Facebook Account with Email or Login via Google',AlertSeverity:'error',SnackbarOpen:true});
+      }
 
         if(emailRegex.test(Email)===false && mobileRegex.test(Email)===false)   this.setState({AlertText:'Please input a valid email address or mobile number',AlertSeverity:'error',SnackbarOpen:true})
         else{
