@@ -51,7 +51,7 @@ export default function CommentsSection(props) {
       ) : (
         <GetListOfComments List={props.Comments} />
       )}
-      {console.log(props.Comments)}
+     
     </div>
   );
 }

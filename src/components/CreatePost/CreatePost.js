@@ -9,6 +9,7 @@ import * as api from "../../api/Profile.js";
 import * as api1 from "../../api/feed.js";
 import storage from '../firebase/firebase';
 import { ref,uploadBytes,getDownloadURL } from "firebase/storage"
+import '../feed/feedcardload.scss';
 
 export default class CreatePost extends Component {
   constructor() {
@@ -33,6 +34,7 @@ export default class CreatePost extends Component {
       ValidFrom: "",
       ValidUpto: "",
       Description: "",
+    
     };
   }
 
@@ -52,11 +54,12 @@ export default class CreatePost extends Component {
       ValidFrom: "",
       ValidUpto: "",
       Description: "",
+    
     });
   };
 
   createIssueNode=()=>{
-    this.setState({SnackbarOpen:true,SnackbarText:'Fill All empty Details', SnackbarAlert:'error'});
+    this.setState({SnackbarOpen:true,SnackbarText:'Fill All empty Details', SnackbarAlert:'error',uploading:false});
   }
 
   readImages = async(e)=>{
@@ -73,11 +76,15 @@ export default class CreatePost extends Component {
 
   SendPostToBackend = async(e)=>{
       e.preventDefault();
+      this.setState({uploading:true});
       if(!this.state.Type || this.state.Type.length===0){
+    
         this.createIssueNode();
+     
         return false;
       }
       
+  
       if(this.state.Type==="Collaboration")
       {
         this.setState({Requirement : this.state.Requirement.trim()});
@@ -129,6 +136,7 @@ export default class CreatePost extends Component {
       console.log(Response);
       
       this.setState({SnackbarOpen:true,SnackbarText:Response.data.message,SnackbarAlert:Response.data.type});
+      this.setState({uploading:false});
       if(Response.data.type==="success")
       {
         setTimeout(() => {
@@ -157,6 +165,8 @@ export default class CreatePost extends Component {
         
         loading: false });
   };
+
+
 
   resizeWindow = () => {
     this.setState({ screenWidth: window.innerWidth });
@@ -682,6 +692,7 @@ export default class CreatePost extends Component {
   render() {
     return (
         <div>
+          {  console.log("state",this.state)}
           <Snackbar open={this.state.SnackbarOpen} autoHideDuration={5000} onClose={this.handleClose}>
             <this.AlertMiUi  onClose={this.handleClose} severity={this.state.SnackbarAlert}>{this.state.SnackbarText}</this.AlertMiUi>
           </Snackbar>
@@ -752,9 +763,11 @@ export default class CreatePost extends Component {
           </div>
           <span style={{fontWeight:800, color:'darkred', fontSize:'0.9rem', opacity : `${this.state.ErrorInCreationPost?'1':'0'}`}}>Fill All the required details.</span>
           <br />
-          <Button color='blue' className='mt-2' disabled={this.state.uploading} onClick={(e)=>{this.SendPostToBackend(e)}}>{
+       <Button color='blue' className='mt-2' disabled={this.state.uploading} onClick={(e)=>{this.SendPostToBackend(e)}}>{
           this.state.uploading?<span>Uploading</span>:<span>Send</span>
   }</Button>
+          
+          
         </div>
       </div>
     );
