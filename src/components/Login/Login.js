@@ -367,7 +367,9 @@ class Login extends Component {
     const FirstName = response.name;
     const LastName ="";
 
-    if(!Email){
+      console.log("email",Email);
+
+    if(Email == "undefined"){
       this.setState({AlertText:'Please link your Facebook Account with Email or Login via Google',AlertSeverity:'error',SnackbarOpen:true});
     }
 
